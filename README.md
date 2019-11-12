@@ -1,22 +1,14 @@
-New Relic's official `winston` instrumentation for use with the
-[Node agent](https://github.com/newrelic/node-newrelic). This module is a
-dependency of the agent and is installed with it by running:
+New Relic's official `winston` log enricher for use with the
+[Node agent](https://github.com/newrelic/node-newrelic).
 
 ```
-npm install newrelic
-```
-
-Alternatively, it can be installed and loaded independently based on specific
-versioning needs:
-
-```
-npm install @newrelic/winston
+npm install @newrelic/winston-enricher
 ```
 
 ```js
 // index.js
 require('newrelic')
-require('@newrelic/winston')
+require('@newrelic/winston-enricher')
 ```
 
 For more information, please see the agent
