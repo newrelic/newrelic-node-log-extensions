@@ -1,0 +1,62 @@
+version: 2.1
+
+workflows:
+  main:
+    jobs:
+      - lint:
+          version: 12
+      - unit-tests:
+          version: 8
+      - unit-tests:
+          version: 10
+      - unit-tests:
+          version: 12
+      - versioned-tests:
+          version: 8
+      - versioned-tests:
+          version: 10
+      - versioned-tests:
+          version: 12
+
+jobs:
+  lint:
+    parameters:
+      version:
+        type: string
+    docker:
+      - image: circleci/node:<< parameters.version >>
+    steps:
+      - checkout
+      - run:
+          name: "Lint"
+          command: |
+            npm install
+            npm run lint
+
+  unit-tests:
+    parameters:
+      version:
+        type: string
+    docker:
+      - image: circleci/node:<< parameters.version >>
+    steps:
+      - checkout
+      - run:
+          name: "Unit Tests"
+          command: |
+            npm install
+            npm run unit
+
+  versioned-tests:
+    parameters:
+      version:
+        type: string
+    docker:
+      - image: circleci/node:<< parameters.version >>
+    steps:
+      - checkout
+      - run:
+          name: "Versioned Tests"
+          command: |
+            npm install
+            npm run versioned
