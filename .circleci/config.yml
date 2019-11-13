@@ -5,18 +5,25 @@ workflows:
     jobs:
       - lint:
           version: 12
+          name: "Lint (Node 12)"
       - unit-tests:
           version: 8
+          name: "Unit Tests (Node 8)"
       - unit-tests:
           version: 10
+          name: "Unit Tests (Node 10)"
       - unit-tests:
           version: 12
+          name: "Unit Tests (Node 12)"
       - versioned-tests:
           version: 8
+          name: "Versioned Tests (Node 8)"
       - versioned-tests:
           version: 10
+          name: "Versioned Tests (Node 10)"
       - versioned-tests:
           version: 12
+          name: "Versioned Tests (Node 12)"
 
 jobs:
   lint:
@@ -28,7 +35,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Lint"
+          name: "Lint (Node << parameters.version >>)"
           command: |
             npm install
             npm run lint
@@ -42,7 +49,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Unit Tests"
+          name: "Unit Tests (Node << parameters.version >>)"
           command: |
             npm install
             npm run unit
@@ -56,7 +63,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Versioned Tests"
+          name: "Versioned Tests (Node << parameters.version >>)"
           command: |
             npm install
             npm run versioned
