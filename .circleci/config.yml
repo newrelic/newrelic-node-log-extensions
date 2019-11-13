@@ -22,7 +22,7 @@ jobs:
   lint:
     parameters:
       version:
-        type: string
+        type: integer
     docker:
       - image: circleci/node:<< parameters.version >>
     steps:
@@ -36,7 +36,7 @@ jobs:
   unit-tests:
     parameters:
       version:
-        type: string
+        type: integer
     docker:
       - image: circleci/node:<< parameters.version >>
     steps:
@@ -50,7 +50,7 @@ jobs:
   versioned-tests:
     parameters:
       version:
-        type: string
+        type: integer
     docker:
       - image: circleci/node:<< parameters.version >>
     steps:
