@@ -19,6 +19,8 @@ require('newrelic')
 require('@newrelic/winston')
 ```
 
+Only Winston versions 3.0.0 and greater are supported.
+
 For more information, please see the agent
 [installation guide](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent),
 and [compatibility and requirements](https://docs.newrelic.com/docs/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent).
