@@ -13,8 +13,9 @@ tap.test('Winston instrumentation', (t) => {
   let winston = null
   t.beforeEach((done) => {
     helper = utils.TestAgent.makeInstrumented()
+
     helper.registerInstrumentation({
-      moduleName: 'logform',
+      moduleName: 'logform/json',
       type: 'generic',
       onRequire: require('../../lib/instrumentation'),
       onError: done
@@ -68,6 +69,69 @@ tap.test('Winston instrumentation', (t) => {
       }
     })
   }
+
+  t.test('should add linking metadata to default logs', (t) => {
+    const config = helper.agent.config
+
+    // These values should be added by the instrumentation even when not in a transaction.
+    const basicAnnotations = {
+      'entity.name': config.applications()[0],
+      'entity.type': 'SERVICE',
+      'hostname': config.getHostnameSafe()
+    }
+
+    // These will be assigned when inside a transaction below and should be in the JSON.
+    let transactionAnnotations
+
+    const streamTest = makeStreamTest(t)
+
+    // These streams are passed to the Winston config below to capture the
+    // output of the logging. `concat` captures all of a stream and passes it to
+    // the given function.
+    const jsonStream = concat(streamTest((msgs) => {
+      msgs.forEach((msg) => {
+        // Make sure the JSON stream actually gets JSON
+        let msgJson
+        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
+
+        // Verify the proper keys are there
+        validateAnnotations(t, msgJson, basicAnnotations)
+
+        // Test that transaction keys are there if in a transaction
+        if (msg.message === 'in trans') {
+          validateAnnotations(t, msgJson, transactionAnnotations)
+        }
+      })
+    }))
+
+    // Example Winston setup to test
+    const logger = winston.createLogger({
+      transports: [
+        // Log to a stream so we can test the output
+        new winston.transports.Stream({
+          level: 'info',
+          stream: jsonStream
+        })
+      ]
+    })
+
+    // Log some stuff, both in and out of a transaction
+    logger.info('out of trans')
+
+    helper.runInTransaction('test', () => {
+      logger.info('in trans')
+
+      const metadata = helper.agent.getLinkingMetadata()
+      // Capture info about the transaction that should show up in the logs
+      transactionAnnotations = {
+        'trace.id': metadata.traceId,
+        'span.id': metadata.spanId
+      }
+
+      // Force the streams to close so that we can test the output
+      jsonStream.end()
+    })
+  })
 
   t.test('should add linking metadata to JSON logs', (t) => {
     const config = helper.agent.config
@@ -143,13 +207,14 @@ tap.test('Winston instrumentation', (t) => {
     // Log some stuff, both in and out of a transaction
     logger.info('out of trans')
 
-    helper.runInTransaction('test', (txn) => {
+    helper.runInTransaction('test', () => {
       logger.info('in trans')
 
+      const metadata = helper.agent.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
-        'trace.id': txn.getTraceId(),
-        'span.id': txn.getSpanId()
+        'trace.id': metadata.traceId,
+        'span.id': metadata.spanId
       }
 
       // Force the streams to close so that we can test the output

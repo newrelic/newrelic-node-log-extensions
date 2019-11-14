@@ -2,6 +2,6 @@
 
 module.exports = [{
   type: 'generic',
-  moduleName: 'winston',
+  moduleName: 'logform/json',
   onRequire: require('./lib/instrumentation')
 }]
