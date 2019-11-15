@@ -63,9 +63,10 @@ tap.test('Winston instrumentation', (t) => {
   // Helper function to compare a json-parsed log msg against the values we expect.
   function validateAnnotations(t, msg, expected) {
     Object.keys(expected).forEach((a) => {
-      t.type(msg[a], 'string', 'should have the proper keys')
-      if (expected[a] !== null) {
-        t.equal(msg[a], expected[a], 'should have the expected value')
+      const ex = expected[a]
+      t.type(msg[a], ex.type, 'should have the proper keys')
+      if (ex.val != null) {
+        t.equal(msg[a], ex.val, 'should have the expected value')
       }
     })
   }
@@ -75,9 +76,25 @@ tap.test('Winston instrumentation', (t) => {
 
     // These values should be added by the instrumentation even when not in a transaction.
     const basicAnnotations = {
-      'entity.name': config.applications()[0],
-      'entity.type': 'SERVICE',
-      'hostname': config.getHostnameSafe()
+      'entity.name': {
+        type: 'string',
+        val: config.applications()[0]
+      },
+      'entity.type': {
+        type: 'string',
+        val: 'SERVICE'
+      },
+      'hostname': {
+        type: 'string',
+        val: config.getHostnameSafe()
+      }
+    }
+
+    // These should show up in the JSON via the combined formatters in the winston config.
+    const loggingAnnotations = {
+      timestamp: {
+        type: 'number'
+      }
     }
 
     // These will be assigned when inside a transaction below and should be in the JSON.
@@ -96,6 +113,7 @@ tap.test('Winston instrumentation', (t) => {
 
         // Verify the proper keys are there
         validateAnnotations(t, msgJson, basicAnnotations)
+        validateAnnotations(t, msgJson, loggingAnnotations)
 
         // Test that transaction keys are there if in a transaction
         if (msg.message === 'in trans') {
@@ -138,15 +156,30 @@ tap.test('Winston instrumentation', (t) => {
 
     // These should show up in the JSON via the combined formatters in the winston config.
     const loggingAnnotations = {
-      timestamp: new Date().getFullYear().toString(),
-      label: 'test'
+      timestamp: {
+        type: 'string',
+        val: new Date().getFullYear().toString()
+      },
+      label: {
+        type: 'string',
+        val: 'test'
+      }
     }
 
     // These values should be added by the instrumentation even when not in a transaction.
     const basicAnnotations = {
-      'entity.name': config.applications()[0],
-      'entity.type': 'SERVICE',
-      'hostname': config.getHostnameSafe()
+      'entity.name': {
+        type: 'string',
+        val: config.applications()[0]
+      },
+      'entity.type': {
+        type: 'string',
+        val: 'SERVICE'
+      },
+      'hostname': {
+        type: 'string',
+        val: config.getHostnameSafe()
+      }
     }
 
     // These will be assigned when inside a transaction below and should be in the JSON.
@@ -213,8 +246,14 @@ tap.test('Winston instrumentation', (t) => {
       const metadata = helper.agent.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
-        'trace.id': metadata.traceId,
-        'span.id': metadata.spanId
+        'trace.id': {
+          type: 'string',
+          val: metadata.traceId
+        },
+        'span.id': {
+          type: 'string',
+          val: metadata.spanId
+        }
       }
 
       // Force the streams to close so that we can test the output
