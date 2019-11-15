@@ -8,9 +8,9 @@ tap.test('Winston instrumentation', (t) => {
   t.tearDown(() => helper.unload())
 
   helper.registerInstrumentation({
-    moduleName: 'logform',
+    moduleName: 'logform/json',
     type: 'generic',
-    onRequire: '../../lib/instrumentation'
+    onRequire: require('../../lib/instrumentation'),
   })
   const winston = require('winston')
 
