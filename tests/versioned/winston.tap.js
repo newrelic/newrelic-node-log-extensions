@@ -263,8 +263,6 @@ tap.test('Winston instrumentation', (t) => {
   })
 
   t.test('should add error metadata to JSON logs', (t) => {
-    const config = helper.agent.config
-
     // These should show up in the JSON via the combined formatters in the winston config.
     let annotations = {
       'error.message': {
@@ -294,7 +292,7 @@ tap.test('Winston instrumentation', (t) => {
     }))
 
     // Example Winston setup to test
-    const logger = winston.createLogger({
+    winston.createLogger({
       exceptionHandlers: [
         new winston.transports.Stream({
           level: 'info',
