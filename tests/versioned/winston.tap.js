@@ -261,4 +261,67 @@ tap.test('Winston instrumentation', (t) => {
       simpleStream.end()
     })
   })
+
+  t.test('should add error metadata to JSON logs', (t) => {
+    const config = helper.agent.config
+
+    // These should show up in the JSON via the combined formatters in the winston config.
+    let annotations = {
+      'error.message': {
+        type: 'string',
+        val: 'test error message'
+      },
+      'error.class': {
+        type: 'string',
+        val: 'TestError'
+      },
+      'error.stack': {
+        type: 'string'
+      }
+    }
+
+    // These streams are passed to the Winston config below to capture the output of the
+    // logging. `concat` captures all of a stream and passes it to the given function.
+    const errorStream = concat(makeStreamTest(t)((msgs) => {
+      msgs.forEach((msg) => {
+        let msgJson
+        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
+        validateAnnotations(t, msgJson, annotations)
+        t.ok(msgJson['error.message'], 'Error messages are captured')
+        t.ok(msgJson['error.class'], 'Error classes are captured')
+        t.ok(msgJson['error.stack'], 'Error stack traces are captured')
+      })
+    }))
+
+    // Example Winston setup to test
+    const logger = winston.createLogger({
+      exceptionHandlers: [
+        new winston.transports.Stream({
+          level: 'info',
+          format: winston.format.json(),
+          stream: errorStream
+        })
+      ],
+      exitOnError: false
+    })
+
+    helper.runInTransaction('test', () => {
+      // Simulate an error being thrown to trigger Winston's error handling
+      class TestError extends Error {
+        constructor(msg) {
+          super(msg)
+          this.name = 'TestError'
+        }
+      }
+      process.emit('uncaughtException', new TestError('test error message'))
+      const metadata = helper.agent.getLinkingMetadata()
+
+      // Capture info about the transaction that should show up in the logs
+      annotations['trace.id'] = { type: 'string', val: metadata.traceId }
+      annotations['span.id'] = { type: 'string', val: metadata.spanId }
+
+      // Force the stream to close so that we can test the output
+      errorStream.end()
+    })
+  })
 })
