@@ -157,6 +157,9 @@ tap.test('Winston instrumentation', (t) => {
     // These should show up in the JSON via the combined formatters in the winston config.
     const loggingAnnotations = {
       timestamp: {
+        type: 'number'
+      },
+      original_timestamp: {
         type: 'string',
         val: new Date().getFullYear().toString()
       },
