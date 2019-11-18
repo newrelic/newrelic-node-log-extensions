@@ -64,9 +64,9 @@ tap.test('Winston instrumentation', (t) => {
   function validateAnnotations(t, msg, expected) {
     Object.keys(expected).forEach((a) => {
       const ex = expected[a]
-      t.type(msg[a], ex.type, 'should have the proper keys')
+      t.type(msg[a], ex.type, `should have the proper keys (${a})`)
       if (ex.val != null) {
-        t.equal(msg[a], ex.val, 'should have the expected value')
+        t.equal(msg[a], ex.val, `should have the expected value (${a})`)
       }
     })
   }
