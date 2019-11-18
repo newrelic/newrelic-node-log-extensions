@@ -122,6 +122,14 @@ tap.test('Winston instrumentation', (t) => {
       })
     }))
 
+    const simpleStream = concat(streamTest((msgs) => {
+      msgs.forEach((msg) => {
+        t.throws(() => JSON.parse(msg), 'should not be json parsable')
+        t.notOk(/timestamp/.exec(msg), 'should clean up timestamp generation')
+        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+      })
+    }))
+
     // Example Winston setup to test
     const logger = winston.createLogger({
       transports: [
@@ -129,6 +137,11 @@ tap.test('Winston instrumentation', (t) => {
         new winston.transports.Stream({
           level: 'info',
           stream: jsonStream
+        }),
+        new winston.transports.Stream({
+          level: 'info',
+          format: winston.format.simple(),
+          stream: simpleStream
         })
       ]
     })
@@ -148,6 +161,7 @@ tap.test('Winston instrumentation', (t) => {
 
       // Force the streams to close so that we can test the output
       jsonStream.end()
+      simpleStream.end()
     })
   })
 
@@ -213,6 +227,7 @@ tap.test('Winston instrumentation', (t) => {
     const simpleStream = concat(streamTest((msgs) => {
       msgs.forEach((msg) => {
         t.throws(() => JSON.parse(msg), 'should not be json parsable')
+        t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
         t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
       })
     }))
