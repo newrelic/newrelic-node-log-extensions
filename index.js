@@ -6,5 +6,6 @@
  * instrumentation then the supportability metrics for custom instrumentation
  * will trigger.
  */
-var newrelic = require('newrelic')
-newrelic.instrument('logform', require('./lib/instrumentation'))
+const newrelic = require('newrelic')
+const formatterFactory = require('./lib/createFormatter.js')
+module.exports = formatterFactory(newrelic)
