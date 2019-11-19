@@ -64,9 +64,9 @@ tap.test('Winston instrumentation', (t) => {
   function validateAnnotations(t, msg, expected) {
     Object.keys(expected).forEach((a) => {
       const ex = expected[a]
-      t.type(msg[a], ex.type, 'should have the proper keys')
+      t.type(msg[a], ex.type, `should have the proper keys (${a})`)
       if (ex.val != null) {
-        t.equal(msg[a], ex.val, 'should have the expected value')
+        t.equal(msg[a], ex.val, `should have the expected value (${a})`)
       }
     })
   }
@@ -116,7 +116,7 @@ tap.test('Winston instrumentation', (t) => {
         validateAnnotations(t, msgJson, loggingAnnotations)
 
         // Test that transaction keys are there if in a transaction
-        if (msg.message === 'in trans') {
+        if (msgJson.message === 'in trans') {
           validateAnnotations(t, msgJson, transactionAnnotations)
         }
       })
@@ -155,8 +155,14 @@ tap.test('Winston instrumentation', (t) => {
       const metadata = helper.agent.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
-        'trace.id': metadata.traceId,
-        'span.id': metadata.spanId
+        'trace.id': {
+          type: 'string',
+          val: metadata['trace.id']
+        },
+        'span.id': {
+          type: 'string',
+          val: metadata['span.id']
+        }
       }
 
       // Force the streams to close so that we can test the output
@@ -218,7 +224,7 @@ tap.test('Winston instrumentation', (t) => {
         validateAnnotations(t, msgJson, loggingAnnotations)
 
         // Test that transaction keys are there if in a transaction
-        if (msg.message === 'in trans') {
+        if (msgJson.message === 'in trans') {
           validateAnnotations(t, msgJson, transactionAnnotations)
         }
       })
@@ -266,11 +272,11 @@ tap.test('Winston instrumentation', (t) => {
       transactionAnnotations = {
         'trace.id': {
           type: 'string',
-          val: metadata.traceId
+          val: metadata['trace.id']
         },
         'span.id': {
           type: 'string',
-          val: metadata.spanId
+          val: metadata['span.id']
         }
       }
 
