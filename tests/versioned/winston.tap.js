@@ -13,6 +13,7 @@ tap.test('Winston instrumentation', (t) => {
 
   const helper = utils.TestAgent.makeInstrumented()
   const winston = require('winston')
+  const api = new API(helper.agent)
   // Keep track of the number of streams that we're waiting to close and test.  Also clean
   // up the info object used by winston/logform to make it easier to test.
   function makeStreamTest(t) {
@@ -121,7 +122,7 @@ tap.test('Winston instrumentation', (t) => {
         // Log to a stream so we can test the output
         new winston.transports.Stream({
           level: 'info',
-          format: formatFactory(new API(helper.agent))(),
+          format: formatFactory(api)(),
           stream: jsonStream
         }),
         new winston.transports.Stream({
@@ -138,7 +139,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = helper.agent.getLinkingMetadata()
+      const metadata = api.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
         'trace.id': {
@@ -235,7 +236,7 @@ tap.test('Winston instrumentation', (t) => {
           format: winston.format.combine(
             winston.format.timestamp({format: 'YYYY'}),
             winston.format.label({label: 'test'}),
-            formatFactory(new API(helper.agent))()
+            formatFactory(api)()
           ),
           stream: jsonStream
         }),
@@ -253,7 +254,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = helper.agent.getLinkingMetadata()
+      const metadata = api.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
         'trace.id': {
@@ -310,7 +311,7 @@ tap.test('Winston instrumentation', (t) => {
       transports: [
         new winston.transports.Stream({
           level: 'info',
-          format: formatFactory(new API(helper.agent))(),
+          format: formatFactory(api)(),
           handleExceptions: true,
           stream: errorStream
         })
@@ -327,7 +328,7 @@ tap.test('Winston instrumentation', (t) => {
         }
       }
       process.emit('uncaughtException', new TestError('test error message'))
-      const metadata = helper.agent.getLinkingMetadata()
+      const metadata = api.getLinkingMetadata()
 
       // Capture info about the transaction that should show up in the logs
       annotations['trace.id'] = { type: 'string', val: metadata['trace.id'] }
