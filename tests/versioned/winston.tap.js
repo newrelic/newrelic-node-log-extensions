@@ -2,32 +2,18 @@
 
 const tap = require('tap')
 const utils = require('@newrelic/test-utilities')
+const formatFactory = require('../../lib/createFormatter.js')
 const concat = require('concat-stream')
+const API = require('newrelic/api')
 
 utils(tap)
 
 tap.test('Winston instrumentation', (t) => {
   t.autoend()
 
-  let helper = null
-  let winston = null
-  t.beforeEach((done) => {
-    helper = utils.TestAgent.makeInstrumented()
-
-    helper.registerInstrumentation({
-      moduleName: 'logform/json',
-      type: 'generic',
-      onRequire: require('../../lib/instrumentation'),
-      onError: done
-    })
-    winston = require('winston')
-    done()
-  })
-  t.afterEach((done) => {
-    helper.unload()
-    done()
-  })
-
+  const helper = utils.TestAgent.makeInstrumented()
+  const winston = require('winston')
+  const api = new API(helper.agent)
   // Keep track of the number of streams that we're waiting to close and test.  Also clean
   // up the info object used by winston/logform to make it easier to test.
   function makeStreamTest(t) {
@@ -136,6 +122,7 @@ tap.test('Winston instrumentation', (t) => {
         // Log to a stream so we can test the output
         new winston.transports.Stream({
           level: 'info',
+          format: formatFactory(api)(),
           stream: jsonStream
         }),
         new winston.transports.Stream({
@@ -152,7 +139,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = helper.agent.getLinkingMetadata()
+      const metadata = api.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
         'trace.id': {
@@ -249,7 +236,7 @@ tap.test('Winston instrumentation', (t) => {
           format: winston.format.combine(
             winston.format.timestamp({format: 'YYYY'}),
             winston.format.label({label: 'test'}),
-            winston.format.json()
+            formatFactory(api)()
           ),
           stream: jsonStream
         }),
@@ -267,7 +254,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = helper.agent.getLinkingMetadata()
+      const metadata = api.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
         'trace.id': {
@@ -317,10 +304,15 @@ tap.test('Winston instrumentation', (t) => {
 
     // Example Winston setup to test
     winston.createLogger({
-      exceptionHandlers: [
+      // There is a bug in winston around piping exception handler data
+      // into the underlying transport that skips the formatters. To
+      // get around this, move the `exceptionHandlers` into `transports` and
+      // set the `handleExceptions` option to `true`.
+      transports: [
         new winston.transports.Stream({
           level: 'info',
-          format: winston.format.json(),
+          format: formatFactory(api)(),
+          handleExceptions: true,
           stream: errorStream
         })
       ],
@@ -336,11 +328,11 @@ tap.test('Winston instrumentation', (t) => {
         }
       }
       process.emit('uncaughtException', new TestError('test error message'))
-      const metadata = helper.agent.getLinkingMetadata()
+      const metadata = api.getLinkingMetadata()
 
       // Capture info about the transaction that should show up in the logs
-      annotations['trace.id'] = { type: 'string', val: metadata.traceId }
-      annotations['span.id'] = { type: 'string', val: metadata.spanId }
+      annotations['trace.id'] = { type: 'string', val: metadata['trace.id'] }
+      annotations['span.id'] = { type: 'string', val: metadata['span.id'] }
 
       // Force the stream to close so that we can test the output
       errorStream.end()

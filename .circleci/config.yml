@@ -6,15 +6,6 @@ workflows:
       - lint:
           version: 12
           name: "Lint (Node 12)"
-      - unit-tests:
-          version: 8
-          name: "Unit Tests (Node 8)"
-      - unit-tests:
-          version: 10
-          name: "Unit Tests (Node 10)"
-      - unit-tests:
-          version: 12
-          name: "Unit Tests (Node 12)"
       - versioned-tests:
           version: 8
           name: "Versioned Tests (Node 8)"
@@ -39,20 +30,6 @@ jobs:
           command: |
             npm install
             npm run lint
-
-  unit-tests:
-    parameters:
-      version:
-        type: integer
-    docker:
-      - image: circleci/node:<< parameters.version >>
-    steps:
-      - checkout
-      - run:
-          name: "Unit Tests (Node << parameters.version >>)"
-          command: |
-            npm install
-            npm run unit
 
   versioned-tests:
     parameters:

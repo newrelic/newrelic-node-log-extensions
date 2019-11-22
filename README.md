@@ -3,7 +3,7 @@
 New Relic's official `winston` log enricher for use with the
 [Node Agent](https://github.com/newrelic/node-newrelic).
 
-The `winston-enricher` adds additional app, distributed trace and span information to your JSON-formatted log messages. This is most commonly used with the New Relic logs product.
+The `winston-enricher` log format adds additional app, distributed trace and span information output as JSON-formatted log messages. This is most commonly used with the New Relic Logs product.
 
 For the latest information, please see [the New Relic docs](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
 
@@ -20,23 +20,20 @@ npm install @newrelic/winston-enricher
 ```js
 // index.js
 require('newrelic')
-require('@newrelic/winston-enricher')
+const newrelicFormatter = require('@newrelic/winston-enricher')
 ```
 
-Include the necessary CommonJS imports prior to the loading of other modules to ensure proper instrumentation. This module is not auto-included by the Node Agent.
-
-#### [Required] JSON Formatted Logs
-
-JSON formatting is required by the New Relic Logs product. This module will not reformat other formats into JSON for log processing automatically.
-
-By default, `winston` uses a JSON format which is supported. You may also leverage the explicit formatter, used by itself or with combined formatters such as:
+The New Relic formatter can be used individually or combined with other
+formatters as the final format.
 
 ```js
 format: winston.format.combine(
   winston.format.label({label: 'test'}),
-  winston.format.json()
+  newrelicFormatter()
 )
 ```
+
+Include the necessary `newrelic` CommonJS import prior to the loading of other modules to ensure proper instrumentation.
 
 ### Version Requirements
 
