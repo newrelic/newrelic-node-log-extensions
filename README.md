@@ -33,8 +33,9 @@ format: winston.format.combine(
 )
 ```
 
-Note: The stack trace will be written to the error.stack attribute on unhandledException log messages.
-The stack and trace attributes will be removed to accomodate for the New Relic 4000 character log line limit.
+**Note for unhandledException log messages:**
+The stack trace will be written to the `error.stack` property.
+To accomodate the New Relic Logs 4000 character log line limit, the `stack` and `trace` properties will be removed and the `message`, `error.message` and `error.stack` values will be truncated to 1024 characters.
 
 
 ### Version Requirements

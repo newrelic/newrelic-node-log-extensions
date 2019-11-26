@@ -27,7 +27,7 @@ tap.test('Should truncate string > 1024 chars', (t) => {
   const processedStr = trucate(longString)
 
   t.equal(processedStr.length, 1024)
-  t.true(processedStr.includes('...'))
+  t.equal(processedStr.substring(processedStr.length - 3), '...')
 
   t.end()
 })
