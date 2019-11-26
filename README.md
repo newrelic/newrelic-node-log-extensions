@@ -33,8 +33,6 @@ format: winston.format.combine(
 )
 ```
 
-Include the necessary `newrelic` CommonJS import prior to the loading of other modules to ensure proper instrumentation.
-
 ### Version Requirements
 
 `winston` versions 3.0.0 and greater are supported.
