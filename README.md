@@ -35,6 +35,10 @@ format: winston.format.combine(
 
 Include the necessary `newrelic` CommonJS import prior to the loading of other modules to ensure proper instrumentation.
 
+Note: The stack trace will be written to the error.stack attribute on unhandledException log messages.
+The stack and trace attributes will be removed to accomodate for the New Relic 4000 character log line limit.
+
+
 ### Version Requirements
 
 `winston` versions 3.0.0 and greater are supported.

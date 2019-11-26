@@ -299,6 +299,8 @@ tap.test('Winston instrumentation', (t) => {
         t.ok(msgJson['error.message'], 'Error messages are captured')
         t.ok(msgJson['error.class'], 'Error classes are captured')
         t.ok(msgJson['error.stack'], 'Error stack traces are captured')
+        t.notOk(msgJson.stack, 'Stack removed from JSON')
+        t.notOk(msgJson.trace, 'trace removed from JSON')
       })
     }))
 
