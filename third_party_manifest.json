@@ -1,9 +1,36 @@
 {
-  "lastUpdated": "Tue Nov 12 2019 15:21:37 GMT-0800 (Pacific Standard Time)",
+  "lastUpdated": "Tue Nov 26 2019 11:13:41 GMT-0800 (Pacific Standard Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeDev": true,
-  "dependencies": {},
+  "dependencies": {
+    "newrelic@6.2.0": {
+      "name": "newrelic",
+      "version": "6.2.0",
+      "range": "^6.2.0",
+      "licenses": "Custom",
+      "repoUrl": "https://github.com/newrelic/node-newrelic",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.2.0",
+      "licenseFile": "node_modules/newrelic/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.2.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "New Relic Node.js agent team",
+      "email": "nodejs@newrelic.com"
+    },
+    "winston@3.2.1": {
+      "name": "winston",
+      "version": "3.2.1",
+      "range": "^3.0.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/winstonjs/winston",
+      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/3.2.1",
+      "licenseFile": "node_modules/winston/LICENSE",
+      "licenseUrl": "https://github.com/winstonjs/winston/blob/3.2.1/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Charlie Robbins",
+      "email": "charlie.robbins@gmail.com"
+    }
+  },
   "devDependencies": {
     "@newrelic/test-utilities@3.2.0": {
       "name": "@newrelic/test-utilities",
@@ -44,19 +71,6 @@
       "publisher": "Nicholas C. Zakas",
       "email": "nicholas+npm@nczconsulting.com"
     },
-    "newrelic@6.1.0": {
-      "name": "newrelic",
-      "version": "6.1.0",
-      "range": "^6.0.0",
-      "licenses": "Custom",
-      "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.1.0",
-      "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.1.0/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "New Relic Node.js agent team",
-      "email": "nodejs@newrelic.com"
-    },
     "tap@14.9.2": {
       "name": "tap",
       "version": "14.9.2",
@@ -70,19 +84,6 @@
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",
       "url": "http://blog.izs.me"
-    },
-    "winston@3.2.1": {
-      "name": "winston",
-      "version": "3.2.1",
-      "range": "^3.2.1",
-      "licenses": "MIT",
-      "repoUrl": "https://github.com/winstonjs/winston",
-      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.2.1",
-      "licenseFile": "node_modules/winston/LICENSE",
-      "licenseUrl": "https://github.com/winstonjs/winston/blob/3.2.1/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "Charlie Robbins",
-      "email": "charlie.robbins@gmail.com"
     }
   }
 }
