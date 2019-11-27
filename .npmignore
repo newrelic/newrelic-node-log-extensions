@@ -4,3 +4,10 @@ newrelic_agent.log
 .eslint*
 .nyc_output
 .vscode
+.github
+.circleci
+third_party_manifest.json
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+
+tests

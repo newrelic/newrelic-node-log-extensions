@@ -1,4 +1,4 @@
-# newrelic-winston-logenricher-node
+# @newrelic/winston-enricher
 
 New Relic's official `winston` log enricher for use with the
 [Node Agent](https://github.com/newrelic/node-newrelic).
