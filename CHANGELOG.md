@@ -1,3 +1,5 @@
-### 1.0.0 (TBD):
+# CHANGELOG
 
-* TBD
+## 0.1.0 (11/26/2019)
+
+* Initial release of log formatter.
