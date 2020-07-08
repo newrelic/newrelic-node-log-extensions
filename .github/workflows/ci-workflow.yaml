@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm ci
+      run: npm install
     - name: Run Linting
       run: npm run lint
 
@@ -35,7 +35,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm ci
+      run: npm install
     - name: Run Unit Tests
       run: npm run unit
 
@@ -53,6 +53,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm ci
+      run: npm install
     - name: Run Versioned Tests
       run: npm run versioned
