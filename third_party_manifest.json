@@ -1,47 +1,47 @@
 {
-  "lastUpdated": "Tue Nov 26 2019 11:13:41 GMT-0800 (Pacific Standard Time)",
+  "lastUpdated": "Thu Jul 23 2020 10:05:41 GMT-0700 (Pacific Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeDev": true,
   "dependencies": {
-    "newrelic@6.2.0": {
+    "newrelic@6.11.0": {
       "name": "newrelic",
-      "version": "6.2.0",
+      "version": "6.11.0",
       "range": "^6.2.0",
-      "licenses": "Custom",
+      "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.2.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.11.0",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.2.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.11.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
     },
-    "winston@3.2.1": {
+    "winston@3.3.3": {
       "name": "winston",
-      "version": "3.2.1",
+      "version": "3.3.3",
       "range": "^3.0.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/winstonjs/winston",
-      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/3.2.1",
+      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.3.3",
       "licenseFile": "node_modules/winston/LICENSE",
-      "licenseUrl": "https://github.com/winstonjs/winston/blob/3.2.1/LICENSE",
+      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.3.3/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Charlie Robbins",
       "email": "charlie.robbins@gmail.com"
     }
   },
   "devDependencies": {
-    "@newrelic/test-utilities@3.2.0": {
+    "@newrelic/test-utilities@4.0.0": {
       "name": "@newrelic/test-utilities",
-      "version": "3.2.0",
-      "range": "^3.0.0",
-      "licenses": "proprietary",
+      "version": "4.0.0",
+      "range": "^4.0.0",
+      "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-test-utilities",
-      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v3.2.0",
-      "licenseFile": "https://raw.github.com/newrelic/node-newrelic/master/LICENSE",
-      "licenseUrl": "https://raw.github.com/newrelic/node-newrelic/master/LICENSE",
-      "licenseTextSource": "url",
+      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v4.0.0",
+      "licenseFile": "node_modules/@newrelic/test-utilities/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v4.0.0/LICENSE",
+      "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
     },
@@ -71,15 +71,15 @@
       "publisher": "Nicholas C. Zakas",
       "email": "nicholas+npm@nczconsulting.com"
     },
-    "tap@14.9.2": {
+    "tap@14.10.8": {
       "name": "tap",
-      "version": "14.9.2",
+      "version": "14.10.8",
       "range": "^14.6.9",
       "licenses": "ISC",
       "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v14.9.2",
+      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v14.10.8",
       "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v14.9.2/LICENSE",
+      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v14.10.8/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",
