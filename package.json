@@ -21,7 +21,7 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
-    "@newrelic/test-utilities": "^3.0.0",
+    "@newrelic/test-utilities": "^4.0.0",
     "concat-stream": "^2.0.0",
     "eslint": "^5.1.0",
     "tap": "^14.6.9"
