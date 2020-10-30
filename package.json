@@ -20,7 +20,7 @@
     "winston": "^3.0.0"
   },
   "peerDependencies": {
-    "newrelic": "^6.2.0"
+    "newrelic": ">=6.2.0"
   },
   "devDependencies": {
     "@newrelic/test-utilities": "^4.0.0",
