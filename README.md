@@ -9,15 +9,13 @@ The `winston-enricher` log format adds additional app, distributed trace and spa
 
 For the latest information, please see [the New Relic docs](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
 
-## Getting Started
-
-### Installation
+## Installation
 
 ```bash
 npm install @newrelic/winston-enricher
 ```
 
-### Usage
+## Usage
 
 ```js
 // index.js
@@ -49,27 +47,28 @@ For more information, including currently supported Node versions, please see th
 
 For general agent setup, please see the agent [installation guide](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent).
 
-## Open Source License
-
-This project is distributed under the [Apache 2 license](LICENSE).
-
 ## Support
 
-New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported to the project here on GitHub.
+Should you need assistance with New Relic products, you are in good hands with several support channels.
 
-We encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
+If the issue has been confirmed as a bug or is a feature request, file a GitHub issue.
 
-## Community
+**Support Channels**
 
-New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
+* [New Relic Documentation](https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/logs-context-nodejs/nodejs-configure-winston): Comprehensive guidance for using our platform
+* [New Relic Community](https://discuss.newrelic.com/t/node-log-enrichers-logs-in-context/88806): The best place to engage in troubleshooting questions
+* [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
+* [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
+* **[For Community Plus repositories]** [New Relic Technical Support](https://support.newrelic.com/) 24/7/365 ticketed support. Read more about our [Technical Support Offerings](https://docs.newrelic.com/docs/licenses/license-information/general-usage-licenses/support-plan). 
 
-https://discuss.newrelic.com/t/node-log-enrichers-logs-in-context/88806
+## Privacy
+At New Relic we take your privacy and the security of your information seriously, and are committed to protecting your information. We must emphasize the importance of not sharing personal data in public forums, and ask all users to scrub logs and diagnostic information for sensitive information, whether personal, proprietary, or otherwise.
 
-## Issues / Enhancement Requests
+We define “Personal Data” as any information relating to an identified or identifiable individual, including, for example, your name, phone number, post code or zip code, Device ID, IP address, and email address.
 
-Issues and enhancement requests can be submitted in the [Issues tab of this repository](../../issues). Please search for and review the existing open issues before submitting a new issue.
+For more information, review [New Relic’s General Data Privacy Notice](https://newrelic.com/termsandconditions/privacy).
 
-## Contributing
+## Contribute
 
 Contributions are welcome (and if you submit a Enhancement Request, expect to be invited to contribute it yourself :grin:). Please review our [Contributors Guide](CONTRIBUTING.md).
 
@@ -83,4 +82,10 @@ If you believe you have found a security vulnerability in this project or any of
 
 If you would like to contribute to this project, review [these guidelines](./CONTRIBUTING.md).
 
-To [all contributors](https://github.com/newrelic/newrelic-winston-logenricher-node/graphs/contributors), we thank you!  Without your contribution, this project would not be what it is today.
+To [all contributors](https://github.com/newrelic/newrelic-winston-logenricher-node/graphs/contributors), we thank you!  Without your contribution, this project would not be what it is today. We also host a community project page dedicated to [New Relic Winston Log Enricher](https://opensource.newrelic.com/projects/newrelic/newrelic-winston-logenricher-node).
+
+## License
+
+`newrelic-winston-logenricher-node` is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+
+
