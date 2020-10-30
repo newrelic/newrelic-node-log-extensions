@@ -1,22 +1,9 @@
 {
-  "lastUpdated": "Thu Jul 23 2020 10:05:41 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Fri Oct 30 2020 11:12:20 GMT-0700 (Pacific Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeDev": true,
   "dependencies": {
-    "newrelic@6.11.0": {
-      "name": "newrelic",
-      "version": "6.11.0",
-      "range": "^6.2.0",
-      "licenses": "Apache-2.0",
-      "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.11.0",
-      "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.11.0/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "New Relic Node.js agent team",
-      "email": "nodejs@newrelic.com"
-    },
     "winston@3.3.3": {
       "name": "winston",
       "version": "3.3.3",
@@ -32,15 +19,15 @@
     }
   },
   "devDependencies": {
-    "@newrelic/test-utilities@4.0.0": {
+    "@newrelic/test-utilities@4.1.2": {
       "name": "@newrelic/test-utilities",
-      "version": "4.0.0",
+      "version": "4.1.2",
       "range": "^4.0.0",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-test-utilities",
-      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v4.0.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v4.1.2",
       "licenseFile": "node_modules/@newrelic/test-utilities/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v4.0.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v4.1.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -70,6 +57,19 @@
       "licenseTextSource": "file",
       "publisher": "Nicholas C. Zakas",
       "email": "nicholas+npm@nczconsulting.com"
+    },
+    "newrelic@6.14.0": {
+      "name": "newrelic",
+      "version": "6.14.0",
+      "range": "^6.2.0",
+      "licenses": "Apache-2.0",
+      "repoUrl": "https://github.com/newrelic/node-newrelic",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v6.14.0",
+      "licenseFile": "node_modules/newrelic/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v6.14.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "New Relic Node.js agent team",
+      "email": "nodejs@newrelic.com"
     },
     "tap@14.10.8": {
       "name": "tap",
