@@ -5,6 +5,7 @@ const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter.js')
 const concat = require('concat-stream')
 const API = require('newrelic/api')
+const StubApi = require('newrelic/stub_api')
 
 utils(tap)
 
@@ -338,6 +339,78 @@ tap.test('Winston instrumentation', (t) => {
 
       // Force the stream to close so that we can test the output
       errorStream.end()
+    })
+  })
+
+  t.test('should still log user data when agent disabled', (t) => {
+    // These should show up in the JSON via the combined formatters in the winston config.
+    const loggingAnnotations = {
+      timestamp: {
+        type: 'string' // original format
+      },
+      label: {
+        type: 'string',
+        val: 'test'
+      }
+    }
+
+    const streamTest = makeStreamTest(t)
+
+    // These streams are passed to the Winston config below to capture the
+    // output of the logging. `concat` captures all of a stream and passes it to
+    // the given function.
+    const jsonStream = concat(streamTest((msgs) => {
+      tap.equal(msgs.length, 2)
+      msgs.forEach((msg) => {
+        // Make sure the JSON stream actually gets JSON
+        let msgJson
+        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
+
+        // Verify the proper keys are there
+        validateAnnotations(t, msgJson, loggingAnnotations)
+      })
+    }))
+
+    const simpleStream = concat(streamTest((msgs) => {
+      msgs.forEach((msg) => {
+        t.throws(() => JSON.parse(msg), 'should not be json parsable')
+        t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
+        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+      })
+    }))
+
+    // Example Winston setup to test
+    const logger = winston.createLogger({
+      transports: [
+        // Log to a stream so we can test the output
+        new winston.transports.Stream({
+          level: 'info',
+          // Format combos are used here to test that the shim doesn't affect
+          // format piping
+          format: winston.format.combine(
+            winston.format.timestamp({format: 'YYYY'}),
+            winston.format.label({label: 'test'}),
+            formatFactory(new StubApi())() // Stub API mimics disabled agent
+          ),
+          stream: jsonStream
+        }),
+        new winston.transports.Stream({
+          level: 'info',
+          format: winston.format.simple(),
+          stream: simpleStream
+        })
+      ]
+    })
+
+    // Log some stuff, both in and out of a transaction
+    logger.info('out of trans')
+
+    helper.runInTransaction('test', () => {
+      logger.info('in trans')
+
+      // Force the streams to close so that we can test the output
+      jsonStream.end()
+      simpleStream.end()
     })
   })
 })
