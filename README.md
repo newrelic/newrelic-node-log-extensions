@@ -15,10 +15,6 @@ For the latest information, please see [the New Relic docs](https://docs.newreli
 npm install @newrelic/winston-enricher
 ```
 
-## Getting Started
-
->[Simple steps to start working with the software similar to a "Hello World"]
-
 ## Usage
 
 ```js
