@@ -1,6 +1,6 @@
 {
   "name": "@newrelic/winston-enricher",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "New Relic log encricher for the `winston` package. Allows `winston` logs to be consumed by New Relic Logs.",
   "main": "index.js",
   "scripts": {
