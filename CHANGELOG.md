@@ -9,11 +9,11 @@
 * Added module load support metric.
 * Breaking: Moved agent dependency to be a peer dependency. It is now required the leveraging application install 'newrelic' directly.
   * This prevents attempts to load multiple copies of the agent. Previously, when an application referenced 'newrelic' the formatter would attempt to load a second copy of the agent. The agent protects against this behavior but it is preferred we avoid this. Also, the prior dependency was too restrictive and would have pinned the formatters version to 6.x versions of the agent.
-* Removed Node v8 from CI
+* Removed Node v8 from CI.
 * Added Node 14 to CI.
-* Update README for consistency with New Relic OSS repositories
+* Update README for consistency with New Relic OSS repositories.
 * Remove Code of Conduct doc and link to New Relic org.
-* Added Open Source Policy Workflow
+* Added Open Source Policy Workflow.
 * Bumped node-test-utilities version to ^4.0.0.
 * Updated third party notices including new footer language.
 * Modifies default branch name wording in contributing guide.
