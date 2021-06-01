@@ -27,7 +27,7 @@
     "concat-stream": "^2.0.0",
     "eslint": "^5.1.0",
     "newrelic": ">=7.0.0",
-    "tap": "^14.6.9"
+    "tap": "^15.0.9"
   },
   "engines": {
     "node": ">=10.0"
