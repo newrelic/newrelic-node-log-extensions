@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "unit": "tap tests/unit/**/*.tap.js --no-coverage",
-    "versioned": "versioned-tests --minor -i 2 'tests/versioned/*.tap.js'",
     "lint": "eslint *.js lib tests",
-    "test": "npm run unit && npm run lint && npm run versioned"
+    "test": "npm run unit && npm run lint && npm run versioned",
+    "versioned": "npm run versioned:npm6",
+    "versioned:npm6": "versioned-tests --minor -i 2 'tests/versioned/*.tap.js'",
+    "versioned:npm7": "versioned-tests --minor --all -i 2 'tests/versioned/*.tap.js'"
   },
   "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
   "license": "Apache-2.0",
