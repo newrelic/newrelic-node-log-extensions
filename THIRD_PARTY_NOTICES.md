@@ -29,7 +29,7 @@ code, the source code can be found at [https://github.com/newrelic/newrelic-wins
 
 ### winston
 
-This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.3.3](https://github.com/winstonjs/winston/tree/v3.3.3)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.3.3/LICENSE):
+This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.2.1](https://github.com/winstonjs/winston/tree/v3.2.1)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.2.1/LICENSE):
 
 ```
 Copyright (c) 2010 Charlie Robbins
@@ -58,7 +58,7 @@ THE SOFTWARE.
 
 ### @newrelic/test-utilities
 
-This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v4.1.2](https://github.com/newrelic/node-test-utilities/tree/v4.1.2)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v4.1.2/LICENSE):
+This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v5.1.0](https://github.com/newrelic/node-test-utilities/tree/v5.1.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v5.1.0/LICENSE):
 
 ```
                                  Apache License
@@ -325,7 +325,7 @@ THE SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v6.14.0](https://github.com/newrelic/node-newrelic/tree/v6.14.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v6.14.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v7.5.2](https://github.com/newrelic/node-newrelic/tree/v7.5.2)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v7.5.2/LICENSE):
 
 ```
                                  Apache License
@@ -533,7 +533,7 @@ This product includes source derived from [newrelic](https://github.com/newrelic
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v14.10.8](https://github.com/tapjs/node-tap/tree/v14.10.8)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v14.10.8/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v15.0.9](https://github.com/tapjs/node-tap/tree/v15.0.9)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v15.0.9/LICENSE):
 
 ```
 The ISC License
