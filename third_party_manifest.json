@@ -1,18 +1,18 @@
 {
-  "lastUpdated": "Mon Jul 19 2021 15:16:06 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Tue Jul 20 2021 10:44:14 GMT-0400 (Eastern Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeDev": true,
   "dependencies": {
-    "winston@3.2.1": {
+    "winston@3.3.3": {
       "name": "winston",
-      "version": "3.2.1",
+      "version": "3.3.3",
       "range": "^3.0.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/winstonjs/winston",
-      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.2.1",
+      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.3.3",
       "licenseFile": "node_modules/winston/LICENSE",
-      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.2.1/LICENSE",
+      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.3.3/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Charlie Robbins",
       "email": "charlie.robbins@gmail.com"
