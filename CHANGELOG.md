@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.0.0 (07/19/2021)
+## 2.0.0 (07/20/2021)
 
 * **BREAKING** Removed support for Node 10.
 
