@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2.0.0 (07/20/2021)
+
+* **BREAKING** Removed support for Node 10.
+
+  The minimum supported version is now Node v12. For further information on our support policy, see: https://docs.newrelic.com/docs/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent.
+
+* Added support for Node 16.
+* Added files list instead of `.npmignore` to specify module contents.
+* Added `workflow_dispatch` to CI workflow to allow manual triggers.
+* Bumped `@newrelic/test-utilities` to ^5.1.0.
+* Bumped `tap` to ^15.0.9.
+* Update `newrelic` dev dependency to >= 7.x.
+
 ## 1.0.0 (11/02/2020)
 
 * Fixed several bugs where the formatter would have unexpected results when the agent is disabled. Fixes include:
