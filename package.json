@@ -6,6 +6,7 @@
   "scripts": {
     "unit": "tap tests/unit/**/*.tap.js --no-coverage",
     "lint": "eslint *.js lib tests",
+    "lint:fix": "eslint --fix *.js lib tests",
     "test": "npm run unit && npm run lint && npm run versioned",
     "versioned": "npm run versioned:npm6",
     "versioned:npm6": "versioned-tests --minor -i 2 'tests/versioned/*.tap.js'",
@@ -27,8 +28,13 @@
   "devDependencies": {
     "@newrelic/test-utilities": "^5.1.0",
     "concat-stream": "^2.0.0",
-    "eslint": "^5.1.0",
-    "newrelic": ">=7.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "newrelic": "^8.1.0",
+    "prettier": "^2.3.2",
     "tap": "^15.0.9"
   },
   "engines": {
