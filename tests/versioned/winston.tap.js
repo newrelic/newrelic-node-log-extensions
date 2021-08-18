@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 New Relic Corporation. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 'use strict'
 
 const tap = require('tap')
@@ -27,7 +32,7 @@ tap.test('Winston instrumentation', (t) => {
 
       // This function will be given to `concat` and will receive an array of messages
       // from Winston when the stream closes.
-      return function(msgs) {
+      return function (msgs) {
         // We only want the log string from the message object. This is stored on the
         // object on a key that is a symbol. Grab that and give it to the assert function.
         const logStrings = msgs.map((msg) => {
@@ -92,30 +97,34 @@ tap.test('Winston instrumentation', (t) => {
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
     // the given function.
-    const jsonStream = concat(streamTest((msgs) => {
-      msgs.forEach((msg) => {
-        // Make sure the JSON stream actually gets JSON
-        let msgJson
-        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
+    const jsonStream = concat(
+      streamTest((msgs) => {
+        msgs.forEach((msg) => {
+          // Make sure the JSON stream actually gets JSON
+          let msgJson
+          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
 
-        // Verify the proper keys are there
-        validateAnnotations(t, msgJson, basicAnnotations)
-        validateAnnotations(t, msgJson, loggingAnnotations)
+          // Verify the proper keys are there
+          validateAnnotations(t, msgJson, basicAnnotations)
+          validateAnnotations(t, msgJson, loggingAnnotations)
 
-        // Test that transaction keys are there if in a transaction
-        if (msgJson.message === 'in trans') {
-          validateAnnotations(t, msgJson, transactionAnnotations)
-        }
+          // Test that transaction keys are there if in a transaction
+          if (msgJson.message === 'in trans') {
+            validateAnnotations(t, msgJson, transactionAnnotations)
+          }
+        })
       })
-    }))
+    )
 
-    const simpleStream = concat(streamTest((msgs) => {
-      msgs.forEach((msg) => {
-        t.throws(() => JSON.parse(msg), 'should not be json parsable')
-        t.notOk(/timestamp/.exec(msg), 'should clean up timestamp generation')
-        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+    const simpleStream = concat(
+      streamTest((msgs) => {
+        msgs.forEach((msg) => {
+          t.throws(() => JSON.parse(msg), 'should not be json parsable')
+          t.notOk(/timestamp/.exec(msg), 'should clean up timestamp generation')
+          t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+        })
       })
-    }))
+    )
 
     // Example Winston setup to test
     const logger = winston.createLogger({
@@ -201,30 +210,34 @@ tap.test('Winston instrumentation', (t) => {
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
     // the given function.
-    const jsonStream = concat(streamTest((msgs) => {
-      msgs.forEach((msg) => {
-        // Make sure the JSON stream actually gets JSON
-        let msgJson
-        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
+    const jsonStream = concat(
+      streamTest((msgs) => {
+        msgs.forEach((msg) => {
+          // Make sure the JSON stream actually gets JSON
+          let msgJson
+          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
 
-        // Verify the proper keys are there
-        validateAnnotations(t, msgJson, basicAnnotations)
-        validateAnnotations(t, msgJson, loggingAnnotations)
+          // Verify the proper keys are there
+          validateAnnotations(t, msgJson, basicAnnotations)
+          validateAnnotations(t, msgJson, loggingAnnotations)
 
-        // Test that transaction keys are there if in a transaction
-        if (msgJson.message === 'in trans') {
-          validateAnnotations(t, msgJson, transactionAnnotations)
-        }
+          // Test that transaction keys are there if in a transaction
+          if (msgJson.message === 'in trans') {
+            validateAnnotations(t, msgJson, transactionAnnotations)
+          }
+        })
       })
-    }))
+    )
 
-    const simpleStream = concat(streamTest((msgs) => {
-      msgs.forEach((msg) => {
-        t.throws(() => JSON.parse(msg), 'should not be json parsable')
-        t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
-        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+    const simpleStream = concat(
+      streamTest((msgs) => {
+        msgs.forEach((msg) => {
+          t.throws(() => JSON.parse(msg), 'should not be json parsable')
+          t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
+          t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+        })
       })
-    }))
+    )
 
     // Example Winston setup to test
     const logger = winston.createLogger({
@@ -235,8 +248,8 @@ tap.test('Winston instrumentation', (t) => {
           // Format combos are used here to test that the shim doesn't affect
           // format piping
           format: winston.format.combine(
-            winston.format.timestamp({format: 'YYYY'}),
-            winston.format.label({label: 'test'}),
+            winston.format.timestamp({ format: 'YYYY' }),
+            winston.format.label({ label: 'test' }),
             formatFactory(api)()
           ),
           stream: jsonStream
@@ -292,18 +305,20 @@ tap.test('Winston instrumentation', (t) => {
 
     // These streams are passed to the Winston config below to capture the output of the
     // logging. `concat` captures all of a stream and passes it to the given function.
-    const errorStream = concat(makeStreamTest(t)((msgs) => {
-      msgs.forEach((msg) => {
-        let msgJson
-        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
-        validateAnnotations(t, msgJson, annotations)
-        t.ok(msgJson['error.message'], 'Error messages are captured')
-        t.ok(msgJson['error.class'], 'Error classes are captured')
-        t.ok(msgJson['error.stack'], 'Error stack traces are captured')
-        t.notOk(msgJson.stack, 'Stack removed from JSON')
-        t.notOk(msgJson.trace, 'trace removed from JSON')
+    const errorStream = concat(
+      makeStreamTest(t)((msgs) => {
+        msgs.forEach((msg) => {
+          let msgJson
+          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
+          validateAnnotations(t, msgJson, annotations)
+          t.ok(msgJson['error.message'], 'Error messages are captured')
+          t.ok(msgJson['error.class'], 'Error classes are captured')
+          t.ok(msgJson['error.stack'], 'Error stack traces are captured')
+          t.notOk(msgJson.stack, 'Stack removed from JSON')
+          t.notOk(msgJson.trace, 'trace removed from JSON')
+        })
       })
-    }))
+    )
 
     // Example Winston setup to test
     winston.createLogger({
@@ -359,25 +374,29 @@ tap.test('Winston instrumentation', (t) => {
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
     // the given function.
-    const jsonStream = concat(streamTest((msgs) => {
-      tap.equal(msgs.length, 2)
-      msgs.forEach((msg) => {
-        // Make sure the JSON stream actually gets JSON
-        let msgJson
-        t.doesNotThrow(() => msgJson = JSON.parse(msg), 'should be JSON')
+    const jsonStream = concat(
+      streamTest((msgs) => {
+        tap.equal(msgs.length, 2)
+        msgs.forEach((msg) => {
+          // Make sure the JSON stream actually gets JSON
+          let msgJson
+          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
 
-        // Verify the proper keys are there
-        validateAnnotations(t, msgJson, loggingAnnotations)
+          // Verify the proper keys are there
+          validateAnnotations(t, msgJson, loggingAnnotations)
+        })
       })
-    }))
+    )
 
-    const simpleStream = concat(streamTest((msgs) => {
-      msgs.forEach((msg) => {
-        t.throws(() => JSON.parse(msg), 'should not be json parsable')
-        t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
-        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+    const simpleStream = concat(
+      streamTest((msgs) => {
+        msgs.forEach((msg) => {
+          t.throws(() => JSON.parse(msg), 'should not be json parsable')
+          t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
+          t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
+        })
       })
-    }))
+    )
 
     // Example Winston setup to test
     const logger = winston.createLogger({
@@ -388,8 +407,8 @@ tap.test('Winston instrumentation', (t) => {
           // Format combos are used here to test that the shim doesn't affect
           // format piping
           format: winston.format.combine(
-            winston.format.timestamp({format: 'YYYY'}),
-            winston.format.label({label: 'test'}),
+            winston.format.timestamp({ format: 'YYYY' }),
+            winston.format.label({ label: 'test' }),
             formatFactory(new StubApi())() // Stub API mimics disabled agent
           ),
           stream: jsonStream
