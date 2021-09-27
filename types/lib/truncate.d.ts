@@ -1,2 +1,2 @@
 export = truncate;
-declare function truncate(str: any): any;
+declare function truncate(str: string): string;

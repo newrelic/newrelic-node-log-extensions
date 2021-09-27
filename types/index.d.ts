@@ -1,2 +1,2 @@
-declare const _exports: any;
+declare const _exports: function;
 export = _exports;
