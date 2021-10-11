@@ -1,2 +1,3 @@
-declare const _exports: function;
-export = _exports;
+import type FormatWrap from 'winston';
+declare function logenricher(newrelic: object): typeof FormatWrap;
+export = logenricher;

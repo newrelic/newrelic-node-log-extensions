@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Thu Aug 19 2021 15:08:44 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Mon Oct 11 2021 14:40:13 GMT-0700 (Pacific Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeOptDeps": false,
@@ -196,6 +196,20 @@
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",
       "url": "http://blog.izs.me"
+    },
+    "tsd@0.17.0": {
+      "name": "tsd",
+      "version": "0.17.0",
+      "range": "^0.17.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/SamVerschueren/tsd",
+      "versionedRepoUrl": "https://github.com/SamVerschueren/tsd/tree/v0.17.0",
+      "licenseFile": "node_modules/tsd/license",
+      "licenseUrl": "https://github.com/SamVerschueren/tsd/blob/v0.17.0/license",
+      "licenseTextSource": "file",
+      "publisher": "Sam Verschueren",
+      "email": "sam.verschueren@gmail.com",
+      "url": "https://github.com/SamVerschueren"
     }
   }
 }
