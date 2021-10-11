@@ -1,3 +1,3 @@
-import type FormatWrap from 'winston';
-declare function logenricher(newrelic: object): typeof FormatWrap;
-export = logenricher;
+import winston from 'winston';
+declare const _default: winston.Logform.FormatWrap;
+export default _default;
