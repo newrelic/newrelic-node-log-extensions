@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Mon Oct 11 2021 16:46:10 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Tue Oct 12 2021 11:12:56 GMT-0700 (Pacific Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeOptDeps": false,
@@ -70,6 +70,17 @@
       "licenseTextSource": "file",
       "publisher": "Max Ogden",
       "email": "max@maxogden.com"
+    },
+    "dtslint@4.1.6": {
+      "name": "dtslint",
+      "version": "4.1.6",
+      "range": "^4.1.6",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/Microsoft/dtslint",
+      "versionedRepoUrl": "https://github.com/Microsoft/dtslint/tree/v4.1.6",
+      "licenseFile": "node_modules/dtslint/LICENSE",
+      "licenseUrl": "https://github.com/Microsoft/dtslint/blob/v4.1.6/LICENSE",
+      "licenseTextSource": "file"
     },
     "eslint-config-prettier@8.3.0": {
       "name": "eslint-config-prettier",
