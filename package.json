@@ -8,7 +8,7 @@
     "unit": "tap tests/unit/**/*.tap.js --no-coverage",
     "lint": "eslint *.js lib tests",
     "lint:fix": "eslint --fix *.js lib tests",
-    "types": "dtslint types",
+    "types": "tsd",
     "test": "npm run unit && npm run lint && npm run types && npm run versioned",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
     "versioned": "npm run versioned:npm6",
@@ -34,7 +34,6 @@
     "@newrelic/newrelic-oss-cli": "^0.1.2",
     "@newrelic/test-utilities": "^5.1.0",
     "concat-stream": "^2.0.0",
-    "dtslint": "^4.1.6",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-header": "^3.1.1",
@@ -44,7 +43,8 @@
     "lint-staged": "^11.1.2",
     "newrelic": "^8.1.0",
     "prettier": "^2.3.2",
-    "tap": "^15.0.9"
+    "tap": "^15.0.9",
+    "tsd": "^0.18.0"
   },
   "engines": {
     "node": ">=12.0"
@@ -54,5 +54,8 @@
     "lib/**",
     "index.js",
     "*.md"
-  ]
+  ],
+  "tsd": {
+    "directory": "./tests/types"
+  }
 }
