@@ -20,8 +20,24 @@ jobs:
       run: npm install
     - name: Run Linting
       run: npm run lint
-    - name: Lint Types
-      run: npx dtslint types
+
+  types:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [lts/*]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies
+      run: npm install
+    - name: Run Type Checking (TSD)
+      run: npm run types
 
   unit:
     runs-on: ubuntu-latest
