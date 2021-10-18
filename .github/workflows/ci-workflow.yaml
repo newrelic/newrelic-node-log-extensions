@@ -21,7 +21,7 @@ jobs:
     - name: Run Linting
       run: npm run lint
     - name: Lint Types
-      run: npm i -g typescript && npm run types
+      run: npx dtslint types
 
   unit:
     runs-on: ubuntu-latest
