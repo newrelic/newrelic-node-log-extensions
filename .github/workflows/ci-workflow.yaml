@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm install
+      run: npm ci
     - name: Run Linting
       run: npm run lint
 
@@ -35,7 +35,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm install
+      run: npm ci
     - name: Run Type Checking (TSD)
       run: npm run types
 
@@ -53,7 +53,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm install
+      run: npm ci
     - name: Run Unit Tests
       run: npm run unit
 
@@ -71,7 +71,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies
-      run: npm install
+      run: npm ci
     - name: Run Versioned Tests (npm v6 / Node 12-14)
       if: ${{ matrix.node-version != '16.x' }}
       run: npm run versioned:npm6
