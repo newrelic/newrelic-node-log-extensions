@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.1.0 (10/20/2021)
+
+* Added TypeScript types.
+* Upgraded setup-node CI job to v2 and changed the linting node version to lts/* for future proofing.
+* Added @newrelic/eslint-config to rely on a centralized eslint ruleset.
+* Updated issue templates for consistency with our other repositories.
+*  Added a pre-commit hook to check if package.json changes and run `oss third-party manifest` and `oss third-party notices`.  This will ensure the `third_party_manifest.json` and `THIRD_PARTY_NOTICES.md` are up to date.
+* Added a pre-commit hook to run linting via huskey.
+
 ## 2.0.0 (07/20/2021)
 
 * **BREAKING** Removed support for Node 10.
