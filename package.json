@@ -1,0 +1,17 @@
+{
+  "name": "@newrelic/pino-enricher",
+  "version": "0.1.0",
+  "description": "New Relic log encricher for the `pino` package. Allows `pino` logs to be consumed by New Relic Logs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "newrelic": "^8.6.0"
+  },
+  "devDependencies": {
+    "pino": "^7.3.0"
+  }
+}
