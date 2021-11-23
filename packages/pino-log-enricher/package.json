@@ -19,9 +19,18 @@
     "newrelic": "^8.6.0"
   },
   "devDependencies": {
+    "newrelic": "^8.6.0",
     "@newrelic/test-utilities": "^6.2.0",
     "flush-write-stream": "^2.0.0",
+    "newrelic": "^8.6.0",
     "split2": "^4.1.0",
     "tap": "^15.1.2"
-  }
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "files": [
+    "lib/**",
+    "index.js"
+  ]
 }

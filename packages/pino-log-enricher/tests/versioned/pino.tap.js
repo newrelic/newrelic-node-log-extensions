@@ -60,7 +60,6 @@ tap.test('Pino instrumentation', (t) => {
 
   t.test('should have proper error keys when error is present', async (t) => {
     const err = new Error('This is a test')
-    console.log(err.stack)
     logger.error(err)
     const line = await once(stream, 'data')
     t.validateAnnotations(line, config)
