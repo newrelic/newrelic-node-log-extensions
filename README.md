@@ -1,23 +1,16 @@
-[![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
+[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)
 
-# [Name of Project] [build badges go here when available]
+# New Relic Node.js logging extensions
 
->[Brief description - what is the project and value does it provide? How often should users expect to get releases? How is versioning set up? Where does this project want to go?]
+The New Relic logging plugins are extensions for common Node.js logging frameworks. They are designed to capture app,
+transaction trace, and span information as part of your application log messages.
 
-## Installation
+For the latest information, please see the [New Relic Documentation](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
 
-> [Include a step-by-step procedure on how to get your code installed. Be sure to include any third-party dependencies that need to be installed separately]
+We support:
 
-## Getting Started
->[Simple steps to start working with the software similar to a "Hello World"]
-
-## Usage
->[**Optional** - Include more thorough instructions on how to use the software. This section might not be needed if the Getting Started section is enough. Remove this section if it's not needed.]
-
-
-## Building
-
->[**Optional** - Include this section if users will need to follow specific instructions to build the software from source. Be sure to include any third party build dependencies that need to be installed separately. Remove this section if it's not needed.]
+* [Winston](packages/winston/README.md)
+* [Pino](packages/pino/README.md)
 
 ## Testing
 
