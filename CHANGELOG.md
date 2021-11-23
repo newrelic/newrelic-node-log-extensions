@@ -11,7 +11,7 @@
 
 ## 2.0.0 (07/20/2021)
 
-* **BREAKING** Removed support for Node 10.
+**BREAKING** Removed support for Node 10.
 
   The minimum supported version is now Node v12. For further information on our support policy, see: https://docs.newrelic.com/docs/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent.
 
