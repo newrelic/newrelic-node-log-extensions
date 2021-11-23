@@ -13,8 +13,7 @@
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
     "versioned": "npm run versioned:npm6",
     "versioned:npm6": "versioned-tests --minor -i 2 'tests/versioned/*.tap.js'",
-    "versioned:npm7": "versioned-tests --minor --all -i 2 'tests/versioned/*.tap.js'",
-    "prepare": "husky install"
+    "versioned:npm7": "versioned-tests --minor --all -i 2 'tests/versioned/*.tap.js'"
   },
   "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
   "license": "Apache-2.0",
@@ -30,19 +29,9 @@
     "newrelic": ">=6.2.0"
   },
   "devDependencies": {
-    "@newrelic/eslint-config": "^0.0.2",
-    "@newrelic/newrelic-oss-cli": "^0.1.2",
     "@newrelic/test-utilities": "^5.1.0",
     "concat-stream": "^2.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.1.2",
     "newrelic": "^8.1.0",
-    "prettier": "^2.3.2",
     "tap": "^15.0.9",
     "tsd": "^0.18.0"
   },

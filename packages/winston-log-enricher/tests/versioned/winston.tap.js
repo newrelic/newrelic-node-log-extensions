@@ -289,7 +289,7 @@ tap.test('Winston instrumentation', (t) => {
 
   t.test('should add error metadata to JSON logs', (t) => {
     // These should show up in the JSON via the combined formatters in the winston config.
-    let annotations = {
+    const annotations = {
       'error.message': {
         type: 'string',
         val: 'test error message'

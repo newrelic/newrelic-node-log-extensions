@@ -83,9 +83,9 @@ tap.test('Pino instrumentation', (t) => {
   })
 
   t.test('should still log user data when agent is disabled', async (t) => {
-    const logger = pino(formatFactory({}), stream)
+    const disabledLogger = pino(formatFactory({}), stream)
     const message = 'logs are not enriched'
-    logger.info(message)
+    disabledLogger.info(message)
     const line = await once(stream, 'data')
     t.equal(line.msg, message)
     t.match(line.time, /[0-9]{10}/)
