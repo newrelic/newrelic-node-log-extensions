@@ -1,0 +1,33 @@
+{
+  "name": "newrelic-node-log-extensions",
+  "version": "0.1.0",
+  "description": "The New Relic logging plugins are extensions for common Node.js logging frameworks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
+  },
+  "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/newrelic/newrelic-node-log-extensions/issues"
+  },
+  "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
+  "devDependencies": {
+    "@newrelic/eslint-config": "^0.0.3",
+    "@newrelic/newrelic-oss-cli": "^0.1.2",
+    "@newrelic/test-utilities": "^6.2.0",
+    "eslint": "^8.3.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.4.1",
+    "tap": "^15.1.2"
+  }
+}
