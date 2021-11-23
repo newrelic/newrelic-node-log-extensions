@@ -17,10 +17,10 @@
   },
   "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/newrelic/newrelic-winston-logenricher-node",
+  "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/newrelic/newrelic-winston-logenricher-node.git"
+    "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
   },
   "dependencies": {
     "winston": "^3.0.0"

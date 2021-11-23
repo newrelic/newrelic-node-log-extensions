@@ -14,12 +14,19 @@
     "versioned:npm7": "versioned-tests --minor --all -i 2 tests/versioned/*.tap.js"
   },
   "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
+  },
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/newrelic/newrelic-node-log-extensions/issues"
+  },
+  "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
   "peerDependencies": {
     "newrelic": "^8.6.0"
   },
   "devDependencies": {
-    "newrelic": "^8.6.0",
     "@newrelic/test-utilities": "^6.2.0",
     "flush-write-stream": "^2.0.0",
     "newrelic": "^8.6.0",

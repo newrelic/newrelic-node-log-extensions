@@ -4,7 +4,7 @@
   "description": "The New Relic logging plugins are extensions for common Node.js logging frameworks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "lerna run test",
     "prepare": "husky install",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
