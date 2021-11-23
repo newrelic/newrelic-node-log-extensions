@@ -1,0 +1,61 @@
+{
+  "name": "@newrelic/winston-enricher",
+  "version": "2.1.0",
+  "description": "New Relic log encricher for the `winston` package. Allows `winston` logs to be consumed by New Relic Logs.",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "unit": "tap tests/unit/**/*.tap.js --no-coverage",
+    "lint": "eslint *.js lib tests",
+    "lint:fix": "eslint --fix *.js lib tests",
+    "types": "tsd",
+    "test": "npm run unit && npm run lint && npm run types && npm run versioned",
+    "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
+    "versioned": "npm run versioned:npm6",
+    "versioned:npm6": "versioned-tests --minor -i 2 'tests/versioned/*.tap.js'",
+    "versioned:npm7": "versioned-tests --minor --all -i 2 'tests/versioned/*.tap.js'",
+    "prepare": "husky install"
+  },
+  "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/newrelic/newrelic-winston-logenricher-node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/newrelic/newrelic-winston-logenricher-node.git"
+  },
+  "dependencies": {
+    "winston": "^3.0.0"
+  },
+  "peerDependencies": {
+    "newrelic": ">=6.2.0"
+  },
+  "devDependencies": {
+    "@newrelic/eslint-config": "^0.0.2",
+    "@newrelic/newrelic-oss-cli": "^0.1.2",
+    "@newrelic/test-utilities": "^5.1.0",
+    "concat-stream": "^2.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "newrelic": "^8.1.0",
+    "prettier": "^2.3.2",
+    "tap": "^15.0.9",
+    "tsd": "^0.18.0"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "files": [
+    "types/**",
+    "lib/**",
+    "index.js",
+    "*.md"
+  ],
+  "tsd": {
+    "directory": "./tests/types"
+  }
+}
