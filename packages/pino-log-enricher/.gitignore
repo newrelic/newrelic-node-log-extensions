@@ -1,0 +1,19 @@
+node_modules
+newrelic_agent.log
+.coverage_data
+cover_html
+npm-debug.log
+*.key
+*.crt
+ca-index*
+ca-serial*
+.DS_Store
+.idea
+out
+.vscode
+.nyc_output
+test/**/package-lock.json
+coverage/
+
+# Needed for testing
+!test/integration/moduleLoading/node_modules
