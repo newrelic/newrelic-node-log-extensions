@@ -11,7 +11,9 @@
     "prepare": "husky install",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
     "unit": "lerna run unit",
-    "versioned": "lerna run versioned"
+    "versioned": "lerna run versioned",
+    "versioned:npm6": "lerna run versioned:npm6",
+    "versioned:npm7": "lerna run versioned:npm7"
   },
   "repository": {
     "type": "git",

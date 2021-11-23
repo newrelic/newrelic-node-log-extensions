@@ -10,6 +10,7 @@ const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter')
 const { sink, once } = require('pino/test/helper')
 const API = require('newrelic/api')
+const truncate = require('../../lib/truncate')
 
 tap.Test.prototype.addAssert(
   'validateAnnotations',
@@ -59,12 +60,13 @@ tap.test('Pino instrumentation', (t) => {
 
   t.test('should have proper error keys when error is present', async (t) => {
     const err = new Error('This is a test')
+    console.log(err.stack)
     logger.error(err)
     const line = await once(stream, 'data')
     t.validateAnnotations(line, config)
     t.equal(line['error.class'], 'Error', 'should have Error as error.class')
     t.equal(line['error.message'], err.message, 'should have proper error.message')
-    t.equal(line['error.stack'], err.stack, 'should have proper error.stack')
+    t.equal(line['error.stack'], truncate(err.stack), 'should have proper error.stack')
     t.notOk(line.err, 'should not have err key')
     t.equal(line.message, err.message, 'should have proper messsage')
     t.end()
