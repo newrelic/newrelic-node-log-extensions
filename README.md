@@ -2,10 +2,9 @@
 
 # New Relic Node.js logging extensions
 
-The New Relic logging plugins are extensions for common Node.js logging frameworks. They are designed to capture app,
-transaction trace, and span information as part of your application log messages.
+The New Relic logging plugins are extensions for common Node.js logging frameworks. They are designed to capture app, transaction trace, and span information as part of your application log messages.
 
-For the latest information, please see the [New Relic Documentation](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
+For the latest information, please see [our docs](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
 
 We support:
 
@@ -14,13 +13,13 @@ We support:
 
 ## Testing
 
-This module includes a list of unit and functional tests.  To run these tests, use the following command
+This module includes a list of unit and functional tests.  To run these tests, use the following command:
 
 ```sh
 npm test
 ```
 
-You may also run individual test suites with the following commands
+You may also run individual test suites with the following commands:
 
 ```sh
 npm run unit # Unit tests
@@ -29,15 +28,15 @@ npm run versioned # Functional tests
 
 ## Support
 
-New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
+New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
-**Support Channels**
+**Support channels**
 
-* [New Relic Documentation](https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/logs-context-nodejs/nodejs-configure-winston): Comprehensive guidance for using our platform
-* [New Relic Community](https://discuss.newrelic.com/t/node-log-enrichers-logs-in-context/88806): The best place to engage in troubleshooting questions
-* [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
-* [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
-* **[For Community Plus repositories]** [New Relic Technical Support](https://support.newrelic.com/) 24/7/365 ticketed support. Read more about our [Technical Support Offerings](https://docs.newrelic.com/docs/licenses/license-information/general-usage-licenses/support-plan).
+* [New Relic docs](https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/logs-context-nodejs/nodejs-configure-winston): Comprehensive guidance for using our platform.
+* [New Relic Community](https://discuss.newrelic.com/t/node-log-enrichers-logs-in-context/88806): The best place to engage in troubleshooting questions.
+* [New Relic developer site](https://developer.newrelic.com/): Resources for building a custom observability applications.
+* [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level.
+* **[For Community Plus repositories]** [New Relic Technical Support](https://support.newrelic.com/) 24/7/365 ticketed support. Read more about our [Technical support offerings](https://docs.newrelic.com/docs/licenses/license-information/general-usage-licenses/support-plan).
 
 ## Contribute
 
@@ -56,4 +55,4 @@ If you would like to contribute to this project, review [these guidelines](./CON
 To all contributors, we thank you!  Without your contribution, this project would not be what it is today.  We also host a community project page dedicated to [New Relic Node.js logging extensions](https://opensource.newrelic.com/projects/newrelic-node-log-extensions).
 
 ## License
-The New Relic Node.js loggin extensions are licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+The New Relic Node.js loggin extensions are licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) license.
