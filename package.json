@@ -1,6 +1,6 @@
 {
   "name": "newrelic-node-log-extensions",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The New Relic logging plugins are extensions for common Node.js logging frameworks",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
     "prepare": "husky install",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky install",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json && lerna run third-party-updates",
     "unit": "lerna run unit",
     "versioned": "lerna run versioned",
