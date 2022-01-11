@@ -1,3 +1,9 @@
+### v0.2.0 (2022-01-11)
+
+* Added workflow to automation release preparation.
+
+* Added job to automatically add issues/pr to Node.js Engineering board
+
 # CHANGELOG
 
 ## 2.1.0 (10/20/2021)
