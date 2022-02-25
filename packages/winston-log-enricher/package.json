@@ -23,7 +23,7 @@
     "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
   },
   "dependencies": {
-    "winston": "^3.0.0"
+    "winston": "^3.5.1"
   },
   "peerDependencies": {
     "newrelic": ">=6.2.0"
