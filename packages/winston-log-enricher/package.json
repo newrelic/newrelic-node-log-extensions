@@ -22,18 +22,17 @@
     "type": "git",
     "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
   },
-  "dependencies": {
-    "winston": "^3.0.0"
-  },
   "peerDependencies": {
-    "newrelic": ">=6.2.0"
+    "newrelic": ">=6.2.0",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "@newrelic/test-utilities": "^5.1.0",
     "concat-stream": "^2.0.0",
     "newrelic": "^8.7.1",
     "tap": "^15.1.5",
-    "tsd": "^0.18.0"
+    "tsd": "^0.18.0",
+    "winston": "^3.6.0"
   },
   "engines": {
     "node": ">=12.0"
