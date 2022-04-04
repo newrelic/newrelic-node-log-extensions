@@ -1,6 +1,18 @@
 # CHANGELOG
 
-## 2.1.0 (10/20/2021)
+## @newrelic/pino-enricher
+
+### 0.1.0 (01/04/2022)
+
+ * Initial release of `@newrelic/pino-enricher`.
+
+## @newrelic/winston-enricher
+
+### 2.2.0 (01/04/2022)
+
+ * No-op release to level set `@newrelic/winston-enricher` within a monorepo.
+
+### 2.1.0 (10/20/2021)
 
 * Added TypeScript types.
 * Upgraded setup-node CI job to v2 and changed the linting node version to lts/* for future proofing.
@@ -9,7 +21,7 @@
 *  Added a pre-commit hook to check if package.json changes and run `oss third-party manifest` and `oss third-party notices`.  This will ensure the `third_party_manifest.json` and `THIRD_PARTY_NOTICES.md` are up to date.
 * Added a pre-commit hook to run linting via huskey.
 
-## 2.0.0 (07/20/2021)
+### 2.0.0 (07/20/2021)
 
 **BREAKING** Removed support for Node 10.
 
@@ -22,7 +34,7 @@
 * Bumped `tap` to ^15.0.9.
 * Update `newrelic` dev dependency to >= 7.x.
 
-## 1.0.0 (11/02/2020)
+### 1.0.0 (11/02/2020)
 
 * Fixed several bugs where the formatter would have unexpected results when the agent is disabled. Fixes include:
   * Now always logs via JSON format.
@@ -41,10 +53,10 @@
 * Modifies default branch name wording in contributing guide.
 * Migrated CI to GitHub Actions from CircleCI.
 
-## 0.1.1 (02/14/2020)
+### 0.1.1 (02/14/2020)
 
 * Handle getLinkingMetadata not returning an object.
 
-## 0.1.0 (11/26/2019)
+### 0.1.0 (11/26/2019)
 
 * Initial release of log formatter.
