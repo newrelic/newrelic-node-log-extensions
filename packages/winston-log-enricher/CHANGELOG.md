@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.1 (04/05/2022)
+
+* Made Winston a peer dependency.
+
 ## 2.1.0 (10/20/2021)
 
 * Added TypeScript types.
