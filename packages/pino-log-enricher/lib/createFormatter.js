@@ -39,6 +39,18 @@ module.exports = function createFormatter(newrelic) {
         }
         return obj
       }
+    },
+    hooks: {
+      logMethod(inputArgs, method, level) {
+        // We'll try to use level labels for the metric name, but if
+        // they don't exist, we'll default back to the level number.
+        const levelLabel = this.levels.labels[level] || level
+        newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
+        newrelic.shim.agent.metrics
+          .getOrCreateMetric(`Logging/lines/${levelLabel}`)
+          .incrementCallCount()
+        return method.apply(this, inputArgs)
+      }
     }
   }
 }
