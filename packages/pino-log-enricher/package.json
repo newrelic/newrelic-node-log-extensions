@@ -31,7 +31,7 @@
     "flush-write-stream": "^2.0.0",
     "newrelic": "^8.6.0",
     "split2": "^4.1.0",
-    "tap": "^15.1.2"
+    "tap": "^16.0.1"
   },
   "engines": {
     "node": ">=12.0"
