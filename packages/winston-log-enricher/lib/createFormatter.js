@@ -51,6 +51,11 @@ module.exports = function createFormatter(newrelic) {
       info[m] = metadata[m]
     })
 
+    const levelLabel = info.level
+    newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
+    newrelic.shim.agent.metrics
+      .getOrCreateMetric(`Logging/lines/${levelLabel}`)
+      .incrementCallCount()
     return jsonFormatter.transform(info, opts)
   })
 }
