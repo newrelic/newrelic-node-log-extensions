@@ -4,10 +4,9 @@
  */
 
 'use strict'
-const winston = require('winston')
 const truncate = require('./truncate')
 
-module.exports = function createFormatter(newrelic) {
+module.exports = function createFormatter(newrelic, winston) {
   // Stub API means agent is not enabled.
   if (!newrelic.shim) {
     // Continue to log original message with JSON formatter

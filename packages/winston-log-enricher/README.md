@@ -19,8 +19,7 @@ npm install @newrelic/winston-enricher
 
 ```js
 // index.js
-require('newrelic')
-const newrelicFormatter = require('@newrelic/winston-enricher')
+const newrelicFormatter = require('@newrelic/winston-enricher')(winston)
 ```
 
 The New Relic formatter can be used individually or combined with other
