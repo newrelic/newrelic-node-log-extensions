@@ -19,7 +19,9 @@ npm install @newrelic/winston-enricher
 
 ```js
 // index.js
-const newrelicFormatter = require('@newrelic/winston-enricher')(winston)
+const newrelicFormatter = require('@newrelic/winston-enricher')
+const winston = require('winston')
+const newrelicWinstonFormatter = newrelicFormatter(winston)
 ```
 
 The New Relic formatter can be used individually or combined with other
@@ -28,7 +30,7 @@ formatters as the final format.
 ```js
 format: winston.format.combine(
   winston.format.label({label: 'test'}),
-  newrelicFormatter()
+  newrelicWinstonFormatter()
 )
 ```
 
