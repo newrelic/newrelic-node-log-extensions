@@ -31,6 +31,7 @@ tap.test('Pino instrumentation', (t) => {
   t.autoend()
   let logger
   let config
+  let pinoConfig
   let helper
   let stream
   let api
@@ -41,7 +42,9 @@ tap.test('Pino instrumentation', (t) => {
     pino = require('pino')
     api = new API(helper.agent)
     stream = sink()
-    logger = pino(formatFactory(api), stream)
+    pinoConfig = formatFactory(api)
+    pinoConfig.level = 'debug'
+    logger = pino(pinoConfig, stream)
     config = helper.agent.config
   })
 
