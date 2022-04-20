@@ -27,7 +27,7 @@
     "newrelic": "^8.6.0"
   },
   "devDependencies": {
-    "@newrelic/test-utilities": "^6.2.0",
+    "@newrelic/test-utilities": "^6.5.3",
     "flush-write-stream": "^2.0.0",
     "newrelic": "^8.6.0",
     "split2": "^4.1.0",
