@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Wed Apr 20 2022 14:56:09 GMT-0700 (Pacific Daylight Time)",
+  "lastUpdated": "Wed Apr 20 2022 15:00:41 GMT-0700 (Pacific Daylight Time)",
   "projectName": "New Relic Node.js Log Extensions",
   "projectUrl": "https://github.com/newrelic/newrelic-node-log-extensions",
   "includeOptDeps": false,
@@ -30,19 +30,6 @@
       "licenseUrl": "https://github.com/newrelic/newrelic-oss-cli/blob/v0.1.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic"
-    },
-    "@newrelic/test-utilities@6.5.3": {
-      "name": "@newrelic/test-utilities",
-      "version": "6.5.3",
-      "range": "^6.2.0",
-      "licenses": "Apache-2.0",
-      "repoUrl": "https://github.com/newrelic/node-test-utilities",
-      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v6.5.3",
-      "licenseFile": "node_modules/@newrelic/test-utilities/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v6.5.3/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "New Relic Node.js agent team",
-      "email": "nodejs@newrelic.com"
     },
     "eslint-plugin-header@3.1.1": {
       "name": "eslint-plugin-header",
@@ -143,20 +130,6 @@
       "licenseUrl": "https://github.com/prettier/prettier/blob/v2.6.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "James Long"
-    },
-    "tap@16.0.1": {
-      "name": "tap",
-      "version": "16.0.1",
-      "range": "^16.0.1",
-      "licenses": "ISC",
-      "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.0.1",
-      "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "Isaac Z. Schlueter",
-      "email": "i@izs.me",
-      "url": "http://blog.izs.me"
     }
   }
 }
