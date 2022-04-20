@@ -14,7 +14,6 @@ code, the source code can be found at [https://github.com/newrelic/newrelic-wins
 
 **[dependencies](#dependencies)**
 
-* [winston](#winston)
 
 **[devDependencies](#devDependencies)**
 
@@ -23,35 +22,10 @@ code, the source code can be found at [https://github.com/newrelic/newrelic-wins
 * [newrelic](#newrelic)
 * [tap](#tap)
 * [tsd](#tsd)
+* [winston](#winston)
 
 
 ## dependencies
-
-### winston
-
-This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.3.3](https://github.com/winstonjs/winston/tree/v3.3.3)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.3.3/LICENSE):
-
-```
-Copyright (c) 2010 Charlie Robbins
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
 
 
 ## devDependencies
@@ -298,7 +272,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.1.0](https://github.com/newrelic/node-newrelic/tree/v8.1.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.1.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.7.1](https://github.com/newrelic/node-newrelic/tree/v8.7.1)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.7.1/LICENSE):
 
 ```
                                  Apache License
@@ -506,12 +480,12 @@ This product includes source derived from [newrelic](https://github.com/newrelic
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v15.0.9](https://github.com/tapjs/node-tap/tree/v15.0.9)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v15.0.9/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.0.1](https://github.com/tapjs/node-tap/tree/v16.0.1)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE):
 
 ```
 The ISC License
 
-Copyright (c) Isaac Z. Schlueter and Contributors
+Copyright (c) 2011-2022 Isaac Z. Schlueter and Contributors
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -542,6 +516,32 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+```
+
+### winston
+
+This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.6.0](https://github.com/winstonjs/winston/tree/v3.6.0)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.6.0/LICENSE):
+
+```
+Copyright (c) 2010 Charlie Robbins
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
 
 

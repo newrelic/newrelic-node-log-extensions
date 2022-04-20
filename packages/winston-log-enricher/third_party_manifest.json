@@ -1,24 +1,10 @@
 {
-  "lastUpdated": "Tue Nov 23 2021 14:06:11 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Wed Apr 20 2022 14:56:11 GMT-0700 (Pacific Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeOptDeps": false,
   "includeDev": true,
-  "dependencies": {
-    "winston@3.3.3": {
-      "name": "winston",
-      "version": "3.3.3",
-      "range": "^3.0.0",
-      "licenses": "MIT",
-      "repoUrl": "https://github.com/winstonjs/winston",
-      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.3.3",
-      "licenseFile": "node_modules/winston/LICENSE",
-      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.3.3/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "Charlie Robbins",
-      "email": "charlie.robbins@gmail.com"
-    }
-  },
+  "dependencies": {},
   "devDependencies": {
     "@newrelic/test-utilities@5.1.0": {
       "name": "@newrelic/test-utilities",
@@ -46,28 +32,28 @@
       "publisher": "Max Ogden",
       "email": "max@maxogden.com"
     },
-    "newrelic@8.1.0": {
+    "newrelic@8.7.1": {
       "name": "newrelic",
-      "version": "8.1.0",
-      "range": "^8.1.0",
+      "version": "8.7.1",
+      "range": "^8.7.1",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.1.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.7.1",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.1.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.7.1/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
     },
-    "tap@15.0.9": {
+    "tap@16.0.1": {
       "name": "tap",
-      "version": "15.0.9",
-      "range": "^15.0.9",
+      "version": "16.0.1",
+      "range": "^16.0.1",
       "licenses": "ISC",
       "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v15.0.9",
+      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.0.1",
       "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v15.0.9/LICENSE",
+      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",
@@ -86,6 +72,19 @@
       "publisher": "Sam Verschueren",
       "email": "sam.verschueren@gmail.com",
       "url": "https://github.com/SamVerschueren"
+    },
+    "winston@3.6.0": {
+      "name": "winston",
+      "version": "3.6.0",
+      "range": "^3.6.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/winstonjs/winston",
+      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.6.0",
+      "licenseFile": "node_modules/winston/LICENSE",
+      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.6.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Charlie Robbins",
+      "email": "charlie.robbins@gmail.com"
     }
   }
 }
