@@ -11,15 +11,24 @@ const formatFactory = require('../../lib/createFormatter.js')
 const concat = require('concat-stream')
 const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
+const winston = require('winston')
 
 utils(tap)
 
 tap.test('Winston instrumentation', (t) => {
   t.autoend()
 
-  const helper = utils.TestAgent.makeInstrumented()
-  const winston = require('winston')
-  const api = new API(helper.agent)
+  let helper
+  let api
+
+  t.beforeEach(() => {
+    helper = utils.TestAgent.makeInstrumented()
+    api = new API(helper.agent)
+  })
+
+  t.afterEach(() => {
+    helper.unload()
+  })
   // Keep track of the number of streams that we're waiting to close and test.  Also clean
   // up the info object used by winston/logform to make it easier to test.
   function makeStreamTest(t) {
