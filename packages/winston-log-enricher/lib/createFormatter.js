@@ -50,11 +50,17 @@ module.exports = function createFormatter(newrelic, winston) {
       info[m] = metadata[m]
     })
 
-    const levelLabel = info.level
-    newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
-    newrelic.shim.agent.metrics
-      .getOrCreateMetric(`Logging/lines/${levelLabel}`)
-      .incrementCallCount()
+    const config = newrelic.shim.agent.config
+
+    // TODO: update the peerdep on the New Relic repo and thereby
+    // remove check for existence of application_logging config item
+    if (config.application_logging && config.application_logging.metrics.enabled) {
+      const levelLabel = info.level
+      newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
+      newrelic.shim.agent.metrics
+        .getOrCreateMetric(`Logging/lines/${levelLabel}`)
+        .incrementCallCount()
+    }
     return jsonFormatter.transform(info, opts)
   })
 }

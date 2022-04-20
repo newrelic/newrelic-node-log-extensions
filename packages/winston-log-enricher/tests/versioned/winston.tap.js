@@ -5,21 +5,32 @@
 
 'use strict'
 
+const fs = require('fs')
 const tap = require('tap')
 const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter.js')
 const concat = require('concat-stream')
 const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
+const winston = require('winston')
 
 utils(tap)
 
 tap.test('Winston instrumentation', (t) => {
   t.autoend()
 
-  const helper = utils.TestAgent.makeInstrumented()
-  const winston = require('winston')
-  const api = new API(helper.agent)
+  let helper
+  let api
+
+  t.beforeEach(() => {
+    helper = utils.TestAgent.makeInstrumented()
+    helper.agent.config.application_logging = { metrics: { enabled: true } }
+    api = new API(helper.agent)
+  })
+
+  t.afterEach(() => {
+    helper.unload()
+  })
   // Keep track of the number of streams that we're waiting to close and test.  Also clean
   // up the info object used by winston/logform to make it easier to test.
   function makeStreamTest(t) {
@@ -430,6 +441,52 @@ tap.test('Winston instrumentation', (t) => {
       // Force the streams to close so that we can test the output
       jsonStream.end()
       simpleStream.end()
+    })
+  })
+
+  t.test('should count logger metrics', (t) => {
+    helper.runInTransaction('winston-test)', () => {
+      const nullStream = fs.createWriteStream('/dev/null')
+      const logger = winston.createLogger({
+        transports: [
+          new winston.transports.Stream({
+            level: 'debug',
+            format: formatFactory(api, winston)(),
+            // We don't care about the output for this test, just
+            // total lines logged
+            stream: nullStream
+          })
+        ]
+      })
+      const logLevels = {
+        debug: 20,
+        info: 5,
+        warn: 3,
+        error: 2
+      }
+      for (const [logLevel, maxCount] of Object.entries(logLevels)) {
+        for (let count = 0; count < maxCount; count++) {
+          const msg = `This is log message #${count} at ${logLevel} level`
+          logger[logLevel](msg)
+        }
+      }
+
+      // Close the stream so that the logging calls are complete
+      nullStream.end()
+
+      let grandTotal = 0
+      for (const [logLevel, maxCount] of Object.entries(logLevels)) {
+        grandTotal += maxCount
+        const metricName = `Logging/lines/${logLevel}`
+        const metric = helper.agent.metrics.getMetric(metricName)
+        t.ok(metric, `ensure ${metricName} exists`)
+        t.equal(metric.callCount, maxCount, `ensure ${metricName} has the right value`)
+      }
+      const metricName = `Logging/lines`
+      const metric = helper.agent.metrics.getMetric(metricName)
+      t.ok(metric, `ensure ${metricName} exists`)
+      t.equal(metric.callCount, grandTotal, `ensure ${metricName} has the right value`)
+      t.end()
     })
   })
 })
