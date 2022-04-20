@@ -39,6 +39,24 @@ module.exports = function createFormatter(newrelic) {
         }
         return obj
       }
+    },
+    hooks: {
+      logMethod(inputArgs, method, level) {
+        const config = newrelic.shim.agent.config
+
+        // TODO: update the peerdep on the New Relic repo and thereby
+        // remove check for existence of application_logging config item
+        if (config.application_logging && config.application_logging.metrics.enabled) {
+          // We'll try to use level labels for the metric name, but if
+          // they don't exist, we'll default back to the level number.
+          const levelLabel = this.levels.labels[level] || level
+          newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
+          newrelic.shim.agent.metrics
+            .getOrCreateMetric(`Logging/lines/${levelLabel}`)
+            .incrementCallCount()
+        }
+        return method.apply(this, inputArgs)
+      }
     }
   }
 }

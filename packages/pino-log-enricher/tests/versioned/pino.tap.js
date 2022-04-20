@@ -31,6 +31,7 @@ tap.test('Pino instrumentation', (t) => {
   t.autoend()
   let logger
   let config
+  let pinoConfig
   let helper
   let stream
   let api
@@ -38,10 +39,13 @@ tap.test('Pino instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
+    helper.agent.config.application_logging = { metrics: { enabled: true } }
     pino = require('pino')
     api = new API(helper.agent)
     stream = sink()
-    logger = pino(formatFactory(api), stream)
+    pinoConfig = formatFactory(api)
+    pinoConfig.level = 'debug'
+    logger = pino(pinoConfig, stream)
     config = helper.agent.config
   })
 
@@ -92,5 +96,37 @@ tap.test('Pino instrumentation', (t) => {
     t.match(line.time, /[0-9]{10}/)
     t.notOk(line['entity.type'])
     t.end()
+  })
+
+  t.test('should count logger metrics', (t) => {
+    helper.runInTransaction('pino-test', async () => {
+      const logLevels = {
+        debug: 20,
+        info: 5,
+        warn: 3,
+        error: 2
+      }
+      for (const [logLevel, maxCount] of Object.entries(logLevels)) {
+        for (let count = 0; count < maxCount; count++) {
+          const msg = `This is log message #${count} at ${logLevel} level`
+          logger[logLevel](msg)
+        }
+      }
+      await once(stream, 'data')
+
+      let grandTotal = 0
+      for (const [logLevel, maxCount] of Object.entries(logLevels)) {
+        grandTotal += maxCount
+        const metricName = `Logging/lines/${logLevel}`
+        const metric = helper.agent.metrics.getMetric(metricName)
+        t.ok(metric, `ensure ${metricName} exists`)
+        t.equal(metric.callCount, maxCount, `ensure ${metricName} has the right value`)
+      }
+      const metricName = `Logging/lines`
+      const metric = helper.agent.metrics.getMetric(metricName)
+      t.ok(metric, `ensure ${metricName} exists`)
+      t.equal(metric.callCount, grandTotal, `ensure ${metricName} has the right value`)
+      t.end()
+    })
   })
 })
