@@ -24,6 +24,7 @@ tap.test('Winston instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
+    helper.agent.config.application_logging = { metrics: { enabled: true } }
     api = new API(helper.agent)
   })
 
