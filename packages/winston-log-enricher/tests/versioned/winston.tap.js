@@ -132,7 +132,7 @@ tap.test('Winston instrumentation', (t) => {
         // Log to a stream so we can test the output
         new winston.transports.Stream({
           level: 'info',
-          format: formatFactory(api)(),
+          format: formatFactory(api, winston)(),
           stream: jsonStream
         }),
         new winston.transports.Stream({
@@ -250,7 +250,7 @@ tap.test('Winston instrumentation', (t) => {
           format: winston.format.combine(
             winston.format.timestamp({ format: 'YYYY' }),
             winston.format.label({ label: 'test' }),
-            formatFactory(api)()
+            formatFactory(api, winston)()
           ),
           stream: jsonStream
         }),
@@ -329,7 +329,7 @@ tap.test('Winston instrumentation', (t) => {
       transports: [
         new winston.transports.Stream({
           level: 'info',
-          format: formatFactory(api)(),
+          format: formatFactory(api, winston)(),
           handleExceptions: true,
           stream: errorStream
         })
@@ -409,7 +409,7 @@ tap.test('Winston instrumentation', (t) => {
           format: winston.format.combine(
             winston.format.timestamp({ format: 'YYYY' }),
             winston.format.label({ label: 'test' }),
-            formatFactory(new StubApi())() // Stub API mimics disabled agent
+            formatFactory(new StubApi(), winston)() // Stub API mimics disabled agent
           ),
           stream: jsonStream
         }),

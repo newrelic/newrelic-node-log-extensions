@@ -1,3 +1,3 @@
 import winston = require('winston');
-declare const _default: winston.Logform.FormatWrap;
+declare function _default(winston: object): winston.Logform.FormatWrap;
 export default _default;

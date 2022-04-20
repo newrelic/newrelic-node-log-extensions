@@ -13,4 +13,4 @@
  */
 const newrelic = require('newrelic')
 const formatterFactory = require('./lib/createFormatter.js')
-module.exports = formatterFactory(newrelic)
+module.exports = formatterFactory.bind(null, newrelic)
