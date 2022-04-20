@@ -39,6 +39,7 @@ tap.test('Pino instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
+    helper.agent.config.application_logging = { metrics: { enabled: true } }
     pino = require('pino')
     api = new API(helper.agent)
     stream = sink()
