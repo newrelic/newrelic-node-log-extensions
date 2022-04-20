@@ -5,6 +5,7 @@
 
 'use strict'
 
+const fs = require('fs')
 const tap = require('tap')
 const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter.js')
@@ -439,6 +440,52 @@ tap.test('Winston instrumentation', (t) => {
       // Force the streams to close so that we can test the output
       jsonStream.end()
       simpleStream.end()
+    })
+  })
+
+  t.test('should count logger metrics', (t) => {
+    helper.runInTransaction('winston-test)', () => {
+      const nullStream = fs.createWriteStream('/dev/null')
+      const logger = winston.createLogger({
+        transports: [
+          new winston.transports.Stream({
+            level: 'debug',
+            format: formatFactory(api, winston)(),
+            // We don't care about the output for this test, just
+            // total lines logged
+            stream: nullStream
+          })
+        ]
+      })
+      const logLevels = {
+        debug: 20,
+        info: 5,
+        warn: 3,
+        error: 2
+      }
+      for (const [logLevel, maxCount] of Object.entries(logLevels)) {
+        for (let count = 0; count < maxCount; count++) {
+          const msg = `This is log message #${count} at ${logLevel} level`
+          logger[logLevel](msg)
+        }
+      }
+
+      // Close the stream so that the logging calls are complete
+      nullStream.end()
+
+      let grandTotal = 0
+      for (const [logLevel, maxCount] of Object.entries(logLevels)) {
+        grandTotal += maxCount
+        const metricName = `Logging/lines/${logLevel}`
+        const metric = helper.agent.metrics.getMetric(metricName)
+        t.ok(metric, `ensure ${metricName} exists`)
+        t.equal(metric.callCount, maxCount, `ensure ${metricName} has the right value`)
+      }
+      const metricName = `Logging/lines`
+      const metric = helper.agent.metrics.getMetric(metricName)
+      t.ok(metric, `ensure ${metricName} exists`)
+      t.equal(metric.callCount, grandTotal, `ensure ${metricName} has the right value`)
+      t.end()
     })
   })
 })
