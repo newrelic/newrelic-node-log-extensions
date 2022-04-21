@@ -5,7 +5,6 @@
 
 'use strict'
 
-const fs = require('fs')
 const tap = require('tap')
 const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter.js')
@@ -13,6 +12,7 @@ const concat = require('concat-stream')
 const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
 const winston = require('winston')
+const stream = require('stream')
 
 utils(tap)
 
@@ -446,7 +446,12 @@ tap.test('Winston instrumentation', (t) => {
 
   t.test('should count logger metrics', (t) => {
     helper.runInTransaction('winston-test)', () => {
-      const nullStream = fs.createWriteStream('/dev/null')
+      const nullStream = new stream.Writable({
+        write: (chunk, encoding, cb) => {
+          cb()
+        }
+      })
+
       const logger = winston.createLogger({
         transports: [
           new winston.transports.Stream({
