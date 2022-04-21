@@ -26,10 +26,10 @@
     "newrelic": ">=6.2.0"
   },
   "devDependencies": {
-    "@newrelic/test-utilities": "^5.1.0",
+    "@newrelic/test-utilities": "^6.5.3",
     "concat-stream": "^2.0.0",
     "newrelic": "^8.7.1",
-    "tap": "^15.1.5",
+    "tap": "^16.0.1",
     "tsd": "^0.18.0",
     "winston": "^3.6.0"
   },

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Tue Nov 23 2021 14:06:11 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Wed Apr 20 2022 15:00:44 GMT-0700 (Pacific Daylight Time)",
   "projectName": "New Relic Pino Log Enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-node-pino-logenricher",
   "includeOptDeps": false,
@@ -58,15 +58,15 @@
       "publisher": "Matteo Collina",
       "email": "hello@matteocollina.com"
     },
-    "tap@15.1.2": {
+    "tap@16.0.1": {
       "name": "tap",
-      "version": "15.1.2",
-      "range": "^15.1.2",
+      "version": "16.0.1",
+      "range": "^16.0.1",
       "licenses": "ISC",
       "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v15.1.2",
+      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.0.1",
       "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v15.1.2/LICENSE",
+      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",

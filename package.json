@@ -8,7 +8,6 @@
     "prepare": "husky install",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky install",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json && lerna run third-party-updates",
     "unit": "lerna run unit",
     "versioned": "lerna run versioned",
@@ -26,17 +25,15 @@
   },
   "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
   "devDependencies": {
-    "@newrelic/eslint-config": "^0.0.3",
+    "@newrelic/eslint-config": "^0.0.4",
     "@newrelic/newrelic-oss-cli": "^0.1.2",
-    "@newrelic/test-utilities": "^6.2.0",
-    "eslint": "^8.3.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "lint-staged": "^12.1.2",
-    "prettier": "^2.4.1",
-    "tap": "^15.1.2"
+    "prettier": "^2.4.1"
   }
 }
