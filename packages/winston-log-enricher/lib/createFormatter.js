@@ -54,7 +54,11 @@ module.exports = function createFormatter(newrelic, winston) {
 
     // TODO: update the peerdep on the New Relic repo and thereby
     // remove check for existence of application_logging config item
-    if (config.application_logging && config.application_logging.metrics.enabled) {
+    if (
+      config.application_logging &&
+      config.application_logging.enabled &&
+      config.application_logging.metrics.enabled
+    ) {
       const levelLabel = info.level
       newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
       newrelic.shim.agent.metrics

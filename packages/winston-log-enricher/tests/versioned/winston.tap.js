@@ -24,7 +24,7 @@ tap.test('Winston instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
-    helper.agent.config.application_logging = { metrics: { enabled: true } }
+    helper.agent.config.application_logging = { enabled: true, metrics: { enabled: true } }
     api = new API(helper.agent)
   })
 
@@ -445,7 +445,7 @@ tap.test('Winston instrumentation', (t) => {
   })
 
   t.test('should count logger metrics', (t) => {
-    helper.runInTransaction('winston-test)', () => {
+    helper.runInTransaction('winston-test', () => {
       const nullStream = new stream.Writable({
         write: (chunk, encoding, cb) => {
           cb()
@@ -492,6 +492,51 @@ tap.test('Winston instrumentation', (t) => {
       t.ok(metric, `ensure ${metricName} exists`)
       t.equal(metric.callCount, grandTotal, `ensure ${metricName} has the right value`)
       t.end()
+    })
+  })
+
+  const configValues = [
+    {
+      name: 'application_logging is not enabled',
+      config: { enabled: false, metrics: { enabled: true } }
+    },
+    {
+      name: 'application_logging.metrics is not enabled',
+      config: { enabled: true, metrics: { enabled: false } }
+    }
+  ]
+  configValues.forEach(({ name, config }) => {
+    t.test(`should not count logger metrics when ${name}`, (t) => {
+      helper.agent.config.application_logging = config
+      helper.runInTransaction('winston-test', () => {
+        const nullStream = new stream.Writable({
+          write: (chunk, encoding, cb) => {
+            cb()
+          }
+        })
+
+        const logger = winston.createLogger({
+          transports: [
+            new winston.transports.Stream({
+              level: 'info',
+              format: formatFactory(api, winston)(),
+              // We don't care about the output for this test, just
+              // total lines logged
+              stream: nullStream
+            })
+          ]
+        })
+
+        logger.info('This is a log message test')
+
+        // Close the stream so that the logging calls are complete
+        nullStream.end()
+        const linesMetric = helper.agent.metrics.getMetric('Logging/lines')
+        t.notOk(linesMetric, 'should not create Logging/lines metric')
+        const levelMetric = helper.agent.metrics.getMetric('Logging/lines/info')
+        t.notOk(levelMetric, 'should not create Logging/lines/info metric')
+        t.end()
+      })
     })
   })
 })
