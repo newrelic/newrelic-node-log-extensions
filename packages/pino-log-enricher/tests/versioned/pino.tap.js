@@ -39,7 +39,7 @@ tap.test('Pino instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
-    helper.agent.config.application_logging = { metrics: { enabled: true } }
+    helper.agent.config.application_logging = { enabled: true, metrics: { enabled: true } }
     pino = require('pino')
     api = new API(helper.agent)
     stream = sink()
@@ -127,6 +127,32 @@ tap.test('Pino instrumentation', (t) => {
       t.ok(metric, `ensure ${metricName} exists`)
       t.equal(metric.callCount, grandTotal, `ensure ${metricName} has the right value`)
       t.end()
+    })
+  })
+
+  const configValues = [
+    {
+      name: 'application_logging is not enabled',
+      config: { enabled: false, metrics: { enabled: true } }
+    },
+    {
+      name: 'application_logging.metrics is not enabled',
+      config: { enabled: true, metrics: { enabled: false } }
+    }
+  ]
+  configValues.forEach(({ name, config }) => {
+    t.test(`should not count logger metrics when ${name}`, (t) => {
+      helper.agent.config.application_logging = config
+      helper.runInTransaction('pino-test', async () => {
+        logger.info('This is a log message test')
+        await once(stream, 'data')
+
+        const linesMetric = helper.agent.metrics.getMetric('Logging/lines')
+        t.notOk(linesMetric, 'should not create Logging/lines metric')
+        const levelMetric = helper.agent.metrics.getMetric('Logging/lines/info')
+        t.notOk(levelMetric, 'should not create Logging/lines/info metric')
+        t.end()
+      })
     })
   })
 })
