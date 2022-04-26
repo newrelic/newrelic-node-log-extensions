@@ -13,6 +13,7 @@ const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
 const winston = require('winston')
 const stream = require('stream')
+const sinon = require('sinon')
 
 utils(tap)
 
@@ -24,7 +25,15 @@ tap.test('Winston instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
-    helper.agent.config.application_logging = { enabled: true, metrics: { enabled: true } }
+    helper.agent.config.application_logging = {
+      enabled: true,
+      metrics: {
+        enabled: true
+      },
+      forwarding: {
+        enabled: true
+      }
+    }
     api = new API(helper.agent)
   })
 
@@ -76,6 +85,7 @@ tap.test('Winston instrumentation', (t) => {
 
   t.test('should add linking metadata to default logs', (t) => {
     const config = helper.agent.config
+    let metadata
 
     // These values should be added by the instrumentation even when not in a transaction.
     const basicAnnotations = {
@@ -104,6 +114,7 @@ tap.test('Winston instrumentation', (t) => {
     let transactionAnnotations
 
     const streamTest = makeStreamTest(t)
+    helper.agent.logs = { add: sinon.stub() }
 
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
@@ -122,6 +133,16 @@ tap.test('Winston instrumentation', (t) => {
           // Test that transaction keys are there if in a transaction
           if (msgJson.message === 'in trans') {
             validateAnnotations(t, msgJson, transactionAnnotations)
+            t.equal(
+              helper.agent.logs.add.callCount,
+              1,
+              'should have only called log aggregator once'
+            )
+            const logAggregatorMsg = {
+              ...helper.agent.logs.add.args[0][0],
+              ...metadata
+            }
+            t.same(JSON.parse(msg), logAggregatorMsg)
           }
         })
       })
@@ -160,7 +181,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = api.getLinkingMetadata()
+      metadata = api.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
         'trace.id': {
