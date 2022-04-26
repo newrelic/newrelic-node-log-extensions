@@ -73,4 +73,7 @@ function createModuleUsageMetric(agent) {
   agent.metrics
     .getOrCreateMetric('Supportability/ExternalModules/WinstonLogEnricher')
     .incrementCallCount()
+  agent.metrics
+    .getOrCreateMetric('Supportability/Logging/Nodejs/winston/enabled')
+    .incrementCallCount()
 }
