@@ -133,11 +133,6 @@ tap.test('Winston instrumentation', (t) => {
           // Test that transaction keys are there if in a transaction
           if (msgJson.message === 'in trans') {
             validateAnnotations(t, msgJson, transactionAnnotations)
-            t.equal(
-              helper.agent.logs.add.callCount,
-              1,
-              'should have only called log aggregator once'
-            )
 
             // The message we sent to the aggregator is going to come
             // back with transaction context, so let's construct the
@@ -146,9 +141,16 @@ tap.test('Winston instrumentation', (t) => {
               ...helper.agent.logs.add.args[0][0],
               ...metadata
             }
-            t.same(JSON.parse(msg), logAggregatorMsg)
+            t.same(
+              JSON.parse(msg),
+              logAggregatorMsg,
+              'should have the expected enriched log message'
+            )
           }
         })
+        // Only one winning combination: in transaction and with
+        // proper config
+        t.equal(helper.agent.logs.add.callCount, 1, 'should have only called log aggregator once')
       })
     )
 
@@ -197,6 +199,16 @@ tap.test('Winston instrumentation', (t) => {
           val: metadata['span.id']
         }
       }
+
+      // Disable forwarding, this should not be logged
+      config.application_logging.forwarding.enabled = false
+      logger.info('forwarding disabled but in trans')
+
+      // Global logger kill switch should also not be aggregated, even
+      // if forwarding is enabled
+      config.application_logging.forwarding = true
+      config.application_logging.enabled = false
+      logger.info('application logging disabled but in trans')
 
       // Force the streams to close so that we can test the output
       jsonStream.end()
