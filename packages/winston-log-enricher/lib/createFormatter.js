@@ -65,6 +65,25 @@ module.exports = function createFormatter(newrelic, winston) {
         .getOrCreateMetric(`Logging/lines/${levelLabel}`)
         .incrementCallCount()
     }
+
+    // Need three conditions to be true to send logs to the
+    // aggregator:
+    // 1) the aggregator exists
+    // 2) we are in a transaction
+    // 3) forwarding is enabled in the config
+    const segment = newrelic.shim.getActiveSegment()
+    const inTransaction = segment && segment.transaction
+
+    const forwardingEnabled =
+      config.application_logging &&
+      config.application_logging.enabled &&
+      config.application_logging.forwarding &&
+      config.application_logging.forwarding.enabled
+
+    if (newrelic.agent.logs && inTransaction && forwardingEnabled) {
+      newrelic.agent.logs.add(info, segment.transaction.priority)
+    }
+
     return jsonFormatter.transform(info, opts)
   })
 }

@@ -13,6 +13,7 @@ const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
 const winston = require('winston')
 const stream = require('stream')
+const sinon = require('sinon')
 
 utils(tap)
 
@@ -24,7 +25,15 @@ tap.test('Winston instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
-    helper.agent.config.application_logging = { enabled: true, metrics: { enabled: true } }
+    helper.agent.config.application_logging = {
+      enabled: true,
+      metrics: {
+        enabled: true
+      },
+      forwarding: {
+        enabled: true
+      }
+    }
     api = new API(helper.agent)
   })
 
@@ -76,6 +85,7 @@ tap.test('Winston instrumentation', (t) => {
 
   t.test('should add linking metadata to default logs', (t) => {
     const config = helper.agent.config
+    let metadata
 
     // These values should be added by the instrumentation even when not in a transaction.
     const basicAnnotations = {
@@ -104,6 +114,7 @@ tap.test('Winston instrumentation', (t) => {
     let transactionAnnotations
 
     const streamTest = makeStreamTest(t)
+    helper.agent.logs = { add: sinon.stub() }
 
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
@@ -122,8 +133,24 @@ tap.test('Winston instrumentation', (t) => {
           // Test that transaction keys are there if in a transaction
           if (msgJson.message === 'in trans') {
             validateAnnotations(t, msgJson, transactionAnnotations)
+
+            // The message we sent to the aggregator is going to come
+            // back with transaction context, so let's construct the
+            // message with that extra metadata for the assertion.
+            const logAggregatorMsg = {
+              ...helper.agent.logs.add.args[0][0],
+              ...metadata
+            }
+            t.same(
+              JSON.parse(msg),
+              logAggregatorMsg,
+              'should have the expected enriched log message'
+            )
           }
         })
+        // Only one winning combination: in transaction and with
+        // proper config
+        t.equal(helper.agent.logs.add.callCount, 1, 'should have only called log aggregator once')
       })
     )
 
@@ -160,7 +187,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = api.getLinkingMetadata()
+      metadata = api.getLinkingMetadata()
       // Capture info about the transaction that should show up in the logs
       transactionAnnotations = {
         'trace.id': {
@@ -172,6 +199,16 @@ tap.test('Winston instrumentation', (t) => {
           val: metadata['span.id']
         }
       }
+
+      // Disable forwarding, this should not be logged
+      config.application_logging.forwarding.enabled = false
+      logger.info('forwarding disabled but in trans')
+
+      // Global logger kill switch should also not be aggregated, even
+      // if forwarding is enabled
+      config.application_logging.forwarding = true
+      config.application_logging.enabled = false
+      logger.info('application logging disabled but in trans')
 
       // Force the streams to close so that we can test the output
       jsonStream.end()
