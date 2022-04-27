@@ -138,6 +138,10 @@ tap.test('Winston instrumentation', (t) => {
               1,
               'should have only called log aggregator once'
             )
+
+            // The message we sent to the aggregator is going to come
+            // back with transaction context, so let's construct the
+            // message with that extra metadata for the assertion.
             const logAggregatorMsg = {
               ...helper.agent.logs.add.args[0][0],
               ...metadata

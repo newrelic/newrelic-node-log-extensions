@@ -66,7 +66,11 @@ module.exports = function createFormatter(newrelic, winston) {
         .incrementCallCount()
     }
 
-    // if the agent has a log aggregator, add log lines to it.
+    // Need three conditions to be true to send logs to the
+    // aggregator:
+    // 1) the aggregator exists
+    // 2) we are in a transaction
+    // 3) forwarding is enabled in the config
     const segment = newrelic.shim.getActiveSegment()
     const inTransaction = segment && segment.transaction
 
