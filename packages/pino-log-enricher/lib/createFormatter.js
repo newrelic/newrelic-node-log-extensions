@@ -75,4 +75,5 @@ function createModuleUsageMetric(agent) {
   agent.metrics
     .getOrCreateMetric('Supportability/ExternalModules/PinoLogEnricher')
     .incrementCallCount()
+  agent.metrics.getOrCreateMetric('Supportability/Logging/Nodejs/pino/enabled').incrementCallCount()
 }
