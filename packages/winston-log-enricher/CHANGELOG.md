@@ -1,5 +1,41 @@
 # CHANGELOG
 
+## 3.0.0 (04/28/2022)
+
+**BREAKING**:  Updated the signature to require passing in the winston package instead of relying on it being a peer dependency.
+
+Before:
+
+```js
+const newrelicFormatter = require('@newrelic/winston-enricher')
+
+format: winston.format.combine(
+  winston.format.label({label: 'test'}),
+  newrelicFormatter()
+)
+```
+
+Now:
+
+```js
+const nrWinstonEnricher = require('@newrelic/winston-enricher')
+const newrelicFormatter = nrWinstonEnricher(winston)
+
+
+format: winston.format.combine(
+  winston.format.label({label: 'test'}),
+  newrelicFormatter()
+)
+```
+
+ * Added ability to report logs within transaction context to the agent when `config.application_logging.forwarding.enabled` is true.
+ * Added application logging user metrics when `config.application_logging.metrics.enabled` is true.(`Logging/lines` and `Logging/lines/<level>`).
+ * Added supportability metrics to indicate when log enricher is enabled.(`Supportability/Logging/Nodejs/winston/enabled`)
+ * Bumped tap to ^16.0.1.
+ * Fixed third-party notice generation.
+ * Bumped @newrelic/test-utilities ^6.5.3.
+ * Dev-only npm audit fixes.
+
 ## 2.1.1 (04/05/2022)
 
 * Made Winston a peer dependency.
