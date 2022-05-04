@@ -79,12 +79,12 @@ tap.test('auto-instrumentation of winston', (t) => {
       api = null
     })
 
-    t.test('should have instrumented winston automatically', (t) => {
+    t.test('should not have instrumented winston automatically', (t) => {
       t.autoend()
       t.not(api.shim.isWrapped(winston.createLogger))
     })
 
-    t.test('should respond with a basic json formatter', (t) => {
+    t.test('should not respond with a basic json formatter', (t) => {
       t.autoend()
       const formatter = formatFactory(api, winston)
       t.notEqual(formatter, winston.format.json)
