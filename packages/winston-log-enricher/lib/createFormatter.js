@@ -29,7 +29,7 @@ module.exports = function createFormatter(newrelic, winston) {
     } else if (isLogFowardingEnabled(config, newrelic)) {
       const metadata = newrelic.getLinkingMetadata(true)
       reformatLogLine(info, metadata, newrelic)
-      addLogLineToAggregator(info)
+      newrelic.agent.logs.add(info)
     } else if (isLogEnricher(config)) {
       const metadata = newrelic.getLinkingMetadata(true)
       reformatLogLine(info, metadata, newrelic)
@@ -182,15 +182,6 @@ function incrementLoggingLinesMetrics(info, newrelic) {
   const { level } = info
   newrelic.shim.agent.metrics.getOrCreateMetric('Logging/lines').incrementCallCount()
   newrelic.shim.agent.metrics.getOrCreateMetric(`Logging/lines/${level}`).incrementCallCount()
-}
-
-/**
- * Adds a log line to log aggregator
- *
- * @param {Object} info log line
- */
-function addLogLineToAggregator(info) {
-  newrelic.agent.logs.add(info)
 }
 
 /**
