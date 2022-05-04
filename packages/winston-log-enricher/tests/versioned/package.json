@@ -14,7 +14,8 @@
         "winston": ">=3"
       },
       "files": [
-        "winston.tap.js"
+        "winston.tap.js",
+        "auto.tap.js"
       ]
     }
   ]
