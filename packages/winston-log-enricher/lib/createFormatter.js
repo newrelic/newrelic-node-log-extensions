@@ -73,9 +73,15 @@ module.exports = function createFormatter(newrelic, winston) {
       config.application_logging.forwarding.enabled
 
     if (newrelic.agent.logs && forwardingEnabled) {
-      // The priority (null second argument) will be randomly set
-      // later, and it's okay if it doesn't match the transaction priority.
-      newrelic.agent.logs.add(info, null)
+      const segment = newrelic.shim.getActiveSegment()
+
+      // Priority could be null even if we have a transaction, as the
+      // priority is usually set at the end of transactions, DT being
+      // a notable exception. Otherwise, matching log priority to the
+      // transaction priority can increase the odds of both being
+      // sampled.
+      const priority = segment && segment.transaction && segment.transaction.priority
+      newrelic.agent.logs.add(info, priority)
     }
 
     return jsonFormatter.transform(info, opts)
