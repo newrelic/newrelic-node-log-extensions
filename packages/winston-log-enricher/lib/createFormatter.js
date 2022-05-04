@@ -12,7 +12,7 @@ module.exports = function createFormatter(newrelic, winston) {
     // Continue to log original message with JSON formatter
     return winston.format.json
   } else if (newrelic.shim.isWrapped(winston.createLogger)) {
-    newrelic.shim.logger.debug('Winston is already instrumented. Skipping enrichment...')
+    newrelic.shim.logger.warn('Winston is already instrumented. Skipping enrichment...')
     return winston.format.json
   }
 
