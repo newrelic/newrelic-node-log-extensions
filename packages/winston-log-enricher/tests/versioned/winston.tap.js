@@ -138,7 +138,7 @@ tap.test('Winston instrumentation', (t) => {
             // back with transaction context, so let's construct the
             // message with that extra metadata for the assertion.
             const logAggregatorMsg = {
-              ...helper.agent.logs.add.args[0][0],
+              ...helper.agent.logs.add.args[1][0],
               ...metadata
             }
             t.same(
@@ -148,9 +148,11 @@ tap.test('Winston instrumentation', (t) => {
             )
           }
         })
-        // Only one winning combination: in transaction and with
-        // proper config
-        t.equal(helper.agent.logs.add.callCount, 1, 'should have only called log aggregator once')
+        t.equal(
+          helper.agent.logs.add.callCount,
+          2,
+          'should have only called log aggregator two times'
+        )
       })
     )
 

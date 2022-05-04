@@ -66,22 +66,22 @@ module.exports = function createFormatter(newrelic, winston) {
         .incrementCallCount()
     }
 
-    // Need three conditions to be true to send logs to the
-    // aggregator:
-    // 1) the aggregator exists
-    // 2) we are in a transaction
-    // 3) forwarding is enabled in the config
-    const segment = newrelic.shim.getActiveSegment()
-    const inTransaction = segment && segment.transaction
-
     const forwardingEnabled =
       config.application_logging &&
       config.application_logging.enabled &&
       config.application_logging.forwarding &&
       config.application_logging.forwarding.enabled
 
-    if (newrelic.agent.logs && inTransaction && forwardingEnabled) {
-      newrelic.agent.logs.add(info, segment.transaction.priority)
+    if (newrelic.agent.logs && forwardingEnabled) {
+      const segment = newrelic.shim.getActiveSegment()
+
+      // Priority could be null even if we have a transaction, as the
+      // priority is usually set at the end of transactions, DT being
+      // a notable exception. Otherwise, matching log priority to the
+      // transaction priority can increase the odds of both being
+      // sampled.
+      const priority = segment && segment.transaction && segment.transaction.priority
+      newrelic.agent.logs.add(info, priority)
     }
 
     return jsonFormatter.transform(info, opts)
