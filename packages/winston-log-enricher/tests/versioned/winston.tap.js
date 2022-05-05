@@ -8,16 +8,23 @@
 const tap = require('tap')
 const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter.js')
-const concat = require('concat-stream')
 const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
 const winston = require('winston')
 const stream = require('stream')
 const sinon = require('sinon')
+const {
+  makeStreamTest,
+  validateAnnotations,
+  getBasicAnnotations,
+  getTransactionAnnotations,
+  concatStreams,
+  validateMsgs
+} = require('./utils')
 
 utils(tap)
 
-tap.test('Winston instrumentation', (t) => {
+tap.test('Winston instrumentation: log enricher', (t) => {
   t.autoend()
 
   let helper
@@ -25,14 +32,9 @@ tap.test('Winston instrumentation', (t) => {
 
   t.beforeEach(() => {
     helper = utils.TestAgent.makeInstrumented()
+    helper.agent.config.entity_guid = 'guid'
     helper.agent.config.application_logging = {
-      enabled: true,
-      metrics: {
-        enabled: true
-      },
-      forwarding: {
-        enabled: true
-      }
+      enabled: false
     }
     api = new API(helper.agent)
   })
@@ -40,69 +42,23 @@ tap.test('Winston instrumentation', (t) => {
   t.afterEach(() => {
     helper.unload()
   })
-  // Keep track of the number of streams that we're waiting to close and test.  Also clean
-  // up the info object used by winston/logform to make it easier to test.
-  function makeStreamTest(t) {
-    let toBeClosed = 0
 
-    // Assert function will receive log strings to be tested
-    return function streamTest(assertFn) {
-      // When creating a stream test, increment the number of streams to wait to close.
-      ++toBeClosed
-
-      // This function will be given to `concat` and will receive an array of messages
-      // from Winston when the stream closes.
-      return function (msgs) {
-        // We only want the log string from the message object. This is stored on the
-        // object on a key that is a symbol. Grab that and give it to the assert function.
-        const logStrings = msgs.map((msg) => {
-          const symbols = Object.getOwnPropertySymbols(msg)
-          const msgSym = symbols.filter((s) => s.toString() === 'Symbol(message)')[0]
-          return msg[msgSym]
-        })
-
-        assertFn(logStrings)
-
-        // If this function is called it is because the stream closed. Decrement the
-        // number of streams we're waiting for and end the test if it's the last one.
-        if (--toBeClosed === 0) {
-          t.end()
-        }
-      }
-    }
-  }
-
-  // Helper function to compare a json-parsed log msg against the values we expect.
-  function validateAnnotations(t, msg, expected) {
-    Object.keys(expected).forEach((a) => {
-      const ex = expected[a]
-      t.type(msg[a], ex.type, `should have the proper keys (${a})`)
-      if (ex.val != null) {
-        t.equal(msg[a], ex.val, `should have the expected value (${a})`)
-      }
-    })
-  }
+  t.test('should add external module metric when loading enricher', (t) => {
+    formatFactory(api, winston)
+    const metric = helper.agent.metrics.getMetric(
+      'Supportability/ExternalModules/WinstonLogEnricher'
+    )
+    t.equal(metric.callCount, 1, 'should create external module metric')
+    t.notOk(
+      helper.agent.metrics.getMetric('Supportability/Logging/Nodejs/winston/enabled'),
+      'should not create logging winston metric'
+    )
+    t.end()
+  })
 
   t.test('should add linking metadata to default logs', (t) => {
     const config = helper.agent.config
-    let metadata
-
-    // These values should be added by the instrumentation even when not in a transaction.
-    const basicAnnotations = {
-      'entity.name': {
-        type: 'string',
-        val: config.applications()[0]
-      },
-      'entity.type': {
-        type: 'string',
-        val: 'SERVICE'
-      },
-      'hostname': {
-        type: 'string',
-        val: config.getHostnameSafe()
-      }
-    }
-
+    const basicAnnotations = getBasicAnnotations(config)
     // These should show up in the JSON via the combined formatters in the winston config.
     const loggingAnnotations = {
       timestamp: {
@@ -113,58 +69,24 @@ tap.test('Winston instrumentation', (t) => {
     // These will be assigned when inside a transaction below and should be in the JSON.
     let transactionAnnotations
 
-    const streamTest = makeStreamTest(t)
     helper.agent.logs = { add: sinon.stub() }
+    const streamTest = makeStreamTest(t)
 
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
     // the given function.
-    const jsonStream = concat(
-      streamTest((msgs) => {
-        msgs.forEach((msg) => {
-          // Make sure the JSON stream actually gets JSON
-          let msgJson
-          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
+    const jsonStream = concatStreams(streamTest, (msgs) => {
+      validateMsgs({ msgs, t, basicAnnotations, loggingAnnotations, transactionAnnotations })
+      t.equal(helper.agent.logs.add.callCount, 0, 'should not have called log aggregator')
+    })
 
-          // Verify the proper keys are there
-          validateAnnotations(t, msgJson, basicAnnotations)
-          validateAnnotations(t, msgJson, loggingAnnotations)
-
-          // Test that transaction keys are there if in a transaction
-          if (msgJson.message === 'in trans') {
-            validateAnnotations(t, msgJson, transactionAnnotations)
-
-            // The message we sent to the aggregator is going to come
-            // back with transaction context, so let's construct the
-            // message with that extra metadata for the assertion.
-            const logAggregatorMsg = {
-              ...helper.agent.logs.add.args[1][0],
-              ...metadata
-            }
-            t.same(
-              JSON.parse(msg),
-              logAggregatorMsg,
-              'should have the expected enriched log message'
-            )
-          }
-        })
-        t.equal(
-          helper.agent.logs.add.callCount,
-          2,
-          'should have only called log aggregator two times'
-        )
+    const simpleStream = concatStreams(streamTest, (msgs) => {
+      msgs.forEach((msg) => {
+        t.throws(() => JSON.parse(msg), 'should not be json parsable')
+        t.notOk(/timestamp/.exec(msg), 'should clean up timestamp generation')
+        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
       })
-    )
-
-    const simpleStream = concat(
-      streamTest((msgs) => {
-        msgs.forEach((msg) => {
-          t.throws(() => JSON.parse(msg), 'should not be json parsable')
-          t.notOk(/timestamp/.exec(msg), 'should clean up timestamp generation')
-          t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
-        })
-      })
-    )
+    })
 
     // Example Winston setup to test
     const logger = winston.createLogger({
@@ -189,28 +111,7 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      metadata = api.getLinkingMetadata()
-      // Capture info about the transaction that should show up in the logs
-      transactionAnnotations = {
-        'trace.id': {
-          type: 'string',
-          val: metadata['trace.id']
-        },
-        'span.id': {
-          type: 'string',
-          val: metadata['span.id']
-        }
-      }
-
-      // Disable forwarding, this should not be logged
-      config.application_logging.forwarding.enabled = false
-      logger.info('forwarding disabled but in trans')
-
-      // Global logger kill switch should also not be aggregated, even
-      // if forwarding is enabled
-      config.application_logging.forwarding = true
-      config.application_logging.enabled = false
-      logger.info('application logging disabled but in trans')
+      transactionAnnotations = getTransactionAnnotations(api)
 
       // Force the streams to close so that we can test the output
       jsonStream.end()
@@ -221,6 +122,7 @@ tap.test('Winston instrumentation', (t) => {
   t.test('should add linking metadata to JSON logs', (t) => {
     const config = helper.agent.config
 
+    const basicAnnotations = getBasicAnnotations(config)
     // These should show up in the JSON via the combined formatters in the winston config.
     const loggingAnnotations = {
       timestamp: {
@@ -236,22 +138,6 @@ tap.test('Winston instrumentation', (t) => {
       }
     }
 
-    // These values should be added by the instrumentation even when not in a transaction.
-    const basicAnnotations = {
-      'entity.name': {
-        type: 'string',
-        val: config.applications()[0]
-      },
-      'entity.type': {
-        type: 'string',
-        val: 'SERVICE'
-      },
-      'hostname': {
-        type: 'string',
-        val: config.getHostnameSafe()
-      }
-    }
-
     // These will be assigned when inside a transaction below and should be in the JSON.
     let transactionAnnotations
 
@@ -260,34 +146,9 @@ tap.test('Winston instrumentation', (t) => {
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
     // the given function.
-    const jsonStream = concat(
-      streamTest((msgs) => {
-        msgs.forEach((msg) => {
-          // Make sure the JSON stream actually gets JSON
-          let msgJson
-          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
-
-          // Verify the proper keys are there
-          validateAnnotations(t, msgJson, basicAnnotations)
-          validateAnnotations(t, msgJson, loggingAnnotations)
-
-          // Test that transaction keys are there if in a transaction
-          if (msgJson.message === 'in trans') {
-            validateAnnotations(t, msgJson, transactionAnnotations)
-          }
-        })
-      })
-    )
-
-    const simpleStream = concat(
-      streamTest((msgs) => {
-        msgs.forEach((msg) => {
-          t.throws(() => JSON.parse(msg), 'should not be json parsable')
-          t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
-          t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
-        })
-      })
-    )
+    const jsonStream = concatStreams(streamTest, (msgs) => {
+      validateMsgs({ msgs, t, basicAnnotations, loggingAnnotations, transactionAnnotations })
+    })
 
     // Example Winston setup to test
     const logger = winston.createLogger({
@@ -303,11 +164,6 @@ tap.test('Winston instrumentation', (t) => {
             formatFactory(api, winston)()
           ),
           stream: jsonStream
-        }),
-        new winston.transports.Stream({
-          level: 'info',
-          format: winston.format.simple(),
-          stream: simpleStream
         })
       ]
     })
@@ -318,22 +174,9 @@ tap.test('Winston instrumentation', (t) => {
     helper.runInTransaction('test', () => {
       logger.info('in trans')
 
-      const metadata = api.getLinkingMetadata()
-      // Capture info about the transaction that should show up in the logs
-      transactionAnnotations = {
-        'trace.id': {
-          type: 'string',
-          val: metadata['trace.id']
-        },
-        'span.id': {
-          type: 'string',
-          val: metadata['span.id']
-        }
-      }
-
-      // Force the streams to close so that we can test the output
+      transactionAnnotations = getTransactionAnnotations(api)
+      // Force the stream to close so that we can test the output
       jsonStream.end()
-      simpleStream.end()
     })
   })
 
@@ -355,20 +198,15 @@ tap.test('Winston instrumentation', (t) => {
 
     // These streams are passed to the Winston config below to capture the output of the
     // logging. `concat` captures all of a stream and passes it to the given function.
-    const errorStream = concat(
-      makeStreamTest(t)((msgs) => {
-        msgs.forEach((msg) => {
-          let msgJson
-          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
-          validateAnnotations(t, msgJson, annotations)
-          t.ok(msgJson['error.message'], 'Error messages are captured')
-          t.ok(msgJson['error.class'], 'Error classes are captured')
-          t.ok(msgJson['error.stack'], 'Error stack traces are captured')
-          t.notOk(msgJson.stack, 'Stack removed from JSON')
-          t.notOk(msgJson.trace, 'trace removed from JSON')
-        })
+    const errorStream = concatStreams(makeStreamTest(t), (msgs) => {
+      msgs.forEach((msg) => {
+        let msgJson
+        t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
+        validateAnnotations(t, msgJson, annotations)
+        t.notOk(msgJson.stack, 'Stack removed from JSON')
+        t.notOk(msgJson.trace, 'trace removed from JSON')
       })
-    )
+    })
 
     // Example Winston setup to test
     winston.createLogger({
@@ -424,29 +262,25 @@ tap.test('Winston instrumentation', (t) => {
     // These streams are passed to the Winston config below to capture the
     // output of the logging. `concat` captures all of a stream and passes it to
     // the given function.
-    const jsonStream = concat(
-      streamTest((msgs) => {
-        tap.equal(msgs.length, 2)
-        msgs.forEach((msg) => {
-          // Make sure the JSON stream actually gets JSON
-          let msgJson
-          t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
+    const jsonStream = concatStreams(streamTest, (msgs) => {
+      t.equal(msgs.length, 2)
+      msgs.forEach((msg) => {
+        // Make sure the JSON stream actually gets JSON
+        let msgJson
+        t.doesNotThrow(() => (msgJson = JSON.parse(msg)), 'should be JSON')
 
-          // Verify the proper keys are there
-          validateAnnotations(t, msgJson, loggingAnnotations)
-        })
+        // Verify the proper keys are there
+        validateAnnotations(t, msgJson, loggingAnnotations)
       })
-    )
+    })
 
-    const simpleStream = concat(
-      streamTest((msgs) => {
-        msgs.forEach((msg) => {
-          t.throws(() => JSON.parse(msg), 'should not be json parsable')
-          t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
-          t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
-        })
+    const simpleStream = concatStreams(streamTest, (msgs) => {
+      msgs.forEach((msg) => {
+        t.throws(() => JSON.parse(msg), 'should not be json parsable')
+        t.notOk(/original_timestamp/.exec(msg), 'should clean up timestamp reassignment')
+        t.ok(/^info:.*trans$/.exec(msg), 'should not have metadata keys')
       })
-    )
+    })
 
     // Example Winston setup to test
     const logger = winston.createLogger({
@@ -482,8 +316,154 @@ tap.test('Winston instrumentation', (t) => {
       simpleStream.end()
     })
   })
+})
+
+tap.test('Winston instrumentation: application logging ', (t) => {
+  t.autoend()
+
+  let helper
+  let api
+
+  t.beforeEach(() => {
+    helper = utils.TestAgent.makeInstrumented()
+    helper.agent.config.application_logging = {
+      enabled: true,
+      metrics: {
+        enabled: false
+      },
+      forwarding: {
+        enabled: true
+      },
+      local_decorating: {
+        enabled: false
+      }
+    }
+    helper.agent.config.entity_guid = 'guid'
+    api = new API(helper.agent)
+  })
+
+  t.afterEach(() => {
+    helper.unload()
+  })
+
+  t.test('should add logging winston metric when as application logging plugin', (t) => {
+    formatFactory(api, winston)
+    const metric = helper.agent.metrics.getMetric('Supportability/Logging/Nodejs/winston/enabled')
+    t.equal(metric.callCount, 1, 'should create logging winston metric')
+    t.notOk(
+      helper.agent.metrics.getMetric('Supportability/ExternalModules/WinstonLogEnricher'),
+      'should not create external module metric'
+    )
+    t.end()
+  })
+
+  t.test('should decorate logs with NR-LINKING metadata when local decorating is enabled', (t) => {
+    const config = helper.agent.config
+    config.application_logging.local_decorating.enabled = true
+    const streamTest = makeStreamTest(t)
+    helper.agent.logs = { add: sinon.stub() }
+    const metadata = []
+    // These streams are passed to the Winston config below to capture the
+    // output of the logging. `concat` captures all of a stream and passes it to
+    // the given function.
+    const jsonStream = concatStreams(streamTest, (msgs) => {
+      t.equal(helper.agent.logs.add.callCount, 0, 'should not have called log aggregator')
+      msgs.forEach((msg, index) => {
+        msg = JSON.parse(msg)
+        t.equal(msg.message, metadata[index], 'should match appropriate NR-LINKING data')
+        t.same(
+          Object.keys(msg).sort(),
+          ['level', 'message'],
+          'should not have NR metadata as json keys'
+        )
+      })
+    })
+    // Example Winston setup to test
+    const logger = winston.createLogger({
+      transports: [
+        // Log to a stream so we can test the output
+        new winston.transports.Stream({
+          level: 'info',
+          format: formatFactory(api, winston)(),
+          stream: jsonStream
+        })
+      ]
+    })
+
+    // Log some stuff, both in and out of a transaction
+    logger.info('out of trans')
+    const meta = api.getLinkingMetadata()
+    metadata.push(
+      `out of trans NR-LINKING|${meta['entity.guid']}|${meta.hostname}|||${encodeURIComponent(
+        meta['entity.name']
+      )}|`
+    )
+
+    helper.runInTransaction('test', () => {
+      logger.info('in trans')
+      const transMeta = api.getLinkingMetadata()
+      metadata.push(
+        `in trans NR-LINKING|${transMeta['entity.guid']}|${transMeta.hostname}|${
+          transMeta['trace.id']
+        }|${transMeta['span.id']}|${encodeURIComponent(transMeta['entity.name'])}|`
+      )
+      jsonStream.end()
+    })
+  })
+
+  t.test('should add metadata to log lines and to log aggregator', (t) => {
+    const streamTest = makeStreamTest(t)
+    helper.agent.logs = { add: sinon.stub() }
+    const metadata = []
+    // These streams are passed to the Winston config below to capture the
+    // output of the logging. `concat` captures all of a stream and passes it to
+    // the given function.
+    const jsonStream = concatStreams(streamTest, (msgs) => {
+      t.equal(helper.agent.logs.add.callCount, 2, 'should have called log aggregator twice')
+      msgs.forEach((msg, index) => {
+        msg = JSON.parse(msg)
+        t.same(
+          msg,
+          helper.agent.logs.add.args[index][0],
+          'should have the expected enriched log message'
+        )
+        t.same(
+          msg,
+          { level: 'info', message: msg.message, timestamp: msg.timestamp, ...metadata[index] },
+          'should add appropriate metadata to log line'
+        )
+        t.notOk(
+          msg.message.includes(' NR-LINKING|'),
+          'should not contain NR-LINKING metadata when forwarding is enabled'
+        )
+      })
+    })
+    // Example Winston setup to test
+    const logger = winston.createLogger({
+      transports: [
+        // Log to a stream so we can test the output
+        new winston.transports.Stream({
+          level: 'info',
+          format: formatFactory(api, winston)(),
+          stream: jsonStream
+        })
+      ]
+    })
+
+    // Log some stuff, both in and out of a transaction
+    logger.info('out of trans')
+    metadata.push(api.getLinkingMetadata())
+
+    helper.runInTransaction('test', () => {
+      logger.info('in trans')
+      metadata.push(api.getLinkingMetadata())
+      jsonStream.end()
+    })
+  })
 
   t.test('should count logger metrics', (t) => {
+    const config = helper.agent.config
+    config.application_logging.metrics.enabled = true
     helper.runInTransaction('winston-test', () => {
       const nullStream = new stream.Writable({
         write: (chunk, encoding, cb) => {
