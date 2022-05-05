@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 3.1.0 (05/05/2022)
+
+ * Added a log line to log aggregator regardless of transaction context when application logging forwarding is enabled.
+ * Added NR-LINKING metadata when local log decorating is enabled.
+ * Cleaned up package to appropriately handle all logging use cases:
+   * agent log forwarding
+   * agent local log decorating
+   * agent supportability metrics around usage
+   * log enrichment
+ * Added logic to prevent double logging with agent application log forwarding and log enrichment.
+
 ## 3.0.0 (04/28/2022)
 
 **BREAKING**:  Updated the signature to require passing in the winston package instead of relying on it being a peer dependency.
