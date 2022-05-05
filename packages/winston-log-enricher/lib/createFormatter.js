@@ -6,6 +6,25 @@
 'use strict'
 const truncate = require('./truncate')
 
+/**
+ * This package is being used to facilitate
+ * the application logging use cases and log enrichment.
+ * It is worth noting that the features below are mutually
+ * exclusive.
+ *
+ * The application logging use cases are local log decorating
+ * and log forwarding.
+ *
+ * Local log decorating appends `NR-LINKING` piped metadata to
+ * the message key in log line. You must configure a log forwarder to get
+ * this data to NR1.
+ *
+ * Log forwarding includes the linking metadata as keys on logging
+ * object as well as adds the log line to the agent log aggregator.
+ *
+ * Log enrichment includes the linking metadata as keys on the logging
+ * object. You must configure a log forwarder to get this data to NR1.
+ */
 module.exports = function createFormatter(newrelic, winston) {
   // Stub API means agent is not enabled.
   if (!newrelic.shim) {
