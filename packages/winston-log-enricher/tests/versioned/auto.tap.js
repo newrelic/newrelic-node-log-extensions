@@ -41,6 +41,11 @@ tap.test('auto-instrumentation of winston', (t) => {
       helper.unload()
       winston = null
       api = null
+      Object.keys(require.cache).forEach((key) => {
+        if (/winston/.test(key)) {
+          delete require.cache[key]
+        }
+      })
     })
 
     t.test('should have instrumented winston automatically', (t) => {
@@ -48,11 +53,14 @@ tap.test('auto-instrumentation of winston', (t) => {
       t.ok(api.shim.isWrapped(winston.createLogger))
     })
 
-    t.test('should respond with a basic json formatter', (t) => {
-      t.autoend()
-      const formatter = formatFactory(api, winston)
-      t.equal(formatter, winston.format.json)
-    })
+    t.test(
+      'formatter factory should respond with basic json formatter because winston is already instrumented',
+      (t) => {
+        t.autoend()
+        const formatter = formatFactory(api, winston)
+        t.equal(formatter, winston.format.json)
+      }
+    )
   })
 
   t.test('when auto-instrumentation does not occur', (t) => {
@@ -84,10 +92,13 @@ tap.test('auto-instrumentation of winston', (t) => {
       t.not(api.shim.isWrapped(winston.createLogger))
     })
 
-    t.test('should not respond with a basic json formatter', (t) => {
-      t.autoend()
-      const formatter = formatFactory(api, winston)
-      t.notEqual(formatter, winston.format.json)
-    })
+    t.test(
+      'formatter factory should not respond with a basic json formatter because winston is not instrumented',
+      (t) => {
+        t.autoend()
+        const formatter = formatFactory(api, winston)
+        t.not(formatter, winston.format.json)
+      }
+    )
   })
 })
