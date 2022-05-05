@@ -4,7 +4,11 @@
 
  * Added a log line to log aggregator regardless of transaction context when application logging forwarding is enabled.
  * Added NR-LINKING metadata when local log decorating is enabled.
- * Cleaned up package to appropriately handle all logging use cases.(log enriching, log forwarding, local log decorating, and supportability metrics on load)
+ * Cleaned up package to appropriately handle all logging use cases:
+   * agent log forwarding
+   * agent local log decorating
+   * agent supportability metrics around usage
+   * log enrichment
  * Added logic to prevent double logging with agent application log forwarding and log enrichment.
 
 ## 3.0.0 (04/28/2022)
