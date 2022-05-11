@@ -34,6 +34,16 @@ format: winston.format.combine(
 )
 ```
 
+**Using log enricher with Node.js agent >= 8.11.0:**
+
+Node.js agent 8.11.0 introduced [application logging](https://docs.newrelic.com/docs/logs/logs-context/configure-logs-context-nodejs/).  By default the agent will instrument winston automatically and depending on your application logging configuration, may favor in agent log forwarding with decoration or local log decorating instead of traditional log enrichment. Log enrichment will still work without any configurations but it is recommended to add the following to your newrelic configuration:
+
+```js
+  application_logging: {
+    enabled: false
+  }
+```
+
 **Note for unhandledException log messages:**
 
 The stack trace will be written to the `error.stack` property.
