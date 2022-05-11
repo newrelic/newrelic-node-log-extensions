@@ -31,7 +31,21 @@ module.exports = function createFormatter(newrelic, winston) {
     // Continue to log original message with JSON formatter
     return winston.format.json
   } else if (newrelic.shim.isWrapped(winston.createLogger)) {
-    newrelic.shim.logger.warn('Winston is already instrumented. Skipping enrichment...')
+    /*
+     * If a customer upgrades the agent to 8.11.0 `application_logging.enabled` is true.
+     * It will cause this package to no longer function as a log enricher because it would
+     * return here because the agent has already wrapped `winston.createLogger`.  We need to
+     * set `application_logging.enabled` to false so when the formatter below gets invoked
+     * it will flow through the `isLogEnricher` branch and properly enrich logs.
+     */
+    if (newrelic.shim.agent.config.application_logging) {
+      newrelic.shim.agent.config.application_logging.enabled = false
+    }
+    newrelic.shim.logger.warn(
+      'winston is already instrumented. Disabling application logging and using package as log enricher.'
+    )
+    createModuleUsageMetric(newrelic.shim.agent, newrelic.shim.agent.config)
+
     return winston.format.json
   }
 
