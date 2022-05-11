@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.1.1 (05/11/2022)
+
+ * Handled case where customer upgrades agent and log enricher will continue to function without any changes.
+ * Updated formatter to favor application log forwarding when both application log forwarding and application local log decorating are both enabled.
+
 ## 3.1.0 (05/05/2022)
 
  * Added a log line to log aggregator regardless of transaction context when application logging forwarding is enabled.
