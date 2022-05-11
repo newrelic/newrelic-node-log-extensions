@@ -59,13 +59,13 @@ module.exports = function createFormatter(newrelic, winston) {
       incrementLoggingLinesMetrics(info, newrelic)
     }
 
-    if (isLocalDecoratingEnabled(config)) {
-      const metadata = newrelic.getLinkingMetadata(true)
-      info.message += formatLinkingMetadata(metadata)
-    } else if (isLogFowardingEnabled(config, newrelic)) {
+    if (isLogFowardingEnabled(config, newrelic)) {
       const metadata = newrelic.getLinkingMetadata(true)
       reformatLogLine(info, metadata, newrelic)
       newrelic.agent.logs.add(info)
+    } else if (isLocalDecoratingEnabled(config)) {
+      const metadata = newrelic.getLinkingMetadata(true)
+      info.message += formatLinkingMetadata(metadata)
     } else if (isLogEnricher(config)) {
       const metadata = newrelic.getLinkingMetadata(true)
       reformatLogLine(info, metadata, newrelic)

@@ -8,9 +8,9 @@
 const tap = require('tap')
 const utils = require('@newrelic/test-utilities')
 const formatFactory = require('../../lib/createFormatter.js')
+const winston = require('winston')
 const API = require('newrelic/api')
 const StubApi = require('newrelic/stub_api')
-const winston = require('winston')
 const stream = require('stream')
 const sinon = require('sinon')
 const {
@@ -332,7 +332,7 @@ tap.test('Winston instrumentation: application logging ', (t) => {
         enabled: false
       },
       forwarding: {
-        enabled: true
+        enabled: false
       },
       local_decorating: {
         enabled: false
@@ -411,53 +411,70 @@ tap.test('Winston instrumentation: application logging ', (t) => {
     })
   })
 
-  t.test('should add metadata to log lines and to log aggregator', (t) => {
-    const streamTest = makeStreamTest(t)
-    helper.agent.logs = { add: sinon.stub() }
-    const metadata = []
-    // These streams are passed to the Winston config below to capture the
-    // output of the logging. `concat` captures all of a stream and passes it to
-    // the given function.
-    const jsonStream = concatStreams(streamTest, (msgs) => {
-      t.equal(helper.agent.logs.add.callCount, 2, 'should have called log aggregator twice')
-      msgs.forEach((msg, index) => {
-        msg = JSON.parse(msg)
-        t.same(
-          msg,
-          helper.agent.logs.add.args[index][0],
-          'should have the expected enriched log message'
-        )
-        t.same(
-          msg,
-          { level: 'info', message: msg.message, timestamp: msg.timestamp, ...metadata[index] },
-          'should add appropriate metadata to log line'
-        )
-        t.notOk(
-          msg.message.includes(' NR-LINKING|'),
-          'should not contain NR-LINKING metadata when forwarding is enabled'
-        )
-      })
-    })
-    // Example Winston setup to test
-    const logger = winston.createLogger({
-      transports: [
-        // Log to a stream so we can test the output
-        new winston.transports.Stream({
-          level: 'info',
-          format: formatFactory(api, winston)(),
-          stream: jsonStream
+  const forwardingTests = [
+    {
+      title:
+        'should add metadata to log lines and to log aggregator when application logging forwarding is enabled',
+      config: { forwarding: { enabled: true } }
+    },
+    {
+      title: 'should favor log forwarding when both forwarding and local decorating are enabled',
+      config: { forwarding: { enabled: true }, local_decorating: { enabled: true } }
+    }
+  ]
+  forwardingTests.forEach(({ config, title }) => {
+    t.test(title, (t) => {
+      helper.agent.config.application_logging = {
+        ...helper.agent.config.application_logging,
+        ...config
+      }
+      const streamTest = makeStreamTest(t)
+      helper.agent.logs = { add: sinon.stub() }
+      const metadata = []
+      // These streams are passed to the Winston config below to capture the
+      // output of the logging. `concat` captures all of a stream and passes it to
+      // the given function.
+      const jsonStream = concatStreams(streamTest, (msgs) => {
+        t.equal(helper.agent.logs.add.callCount, 2, 'should have called log aggregator twice')
+        msgs.forEach((msg, index) => {
+          msg = JSON.parse(msg)
+          t.same(
+            msg,
+            helper.agent.logs.add.args[index][0],
+            'should have the expected enriched log message'
+          )
+          t.same(
+            msg,
+            { level: 'info', message: msg.message, timestamp: msg.timestamp, ...metadata[index] },
+            'should add appropriate metadata to log line'
+          )
+          t.notOk(
+            msg.message.includes(' NR-LINKING|'),
+            'should not contain NR-LINKING metadata when forwarding is enabled'
+          )
         })
-      ]
-    })
+      })
+      // Example Winston setup to test
+      const logger = winston.createLogger({
+        transports: [
+          // Log to a stream so we can test the output
+          new winston.transports.Stream({
+            level: 'info',
+            format: formatFactory(api, winston)(),
+            stream: jsonStream
+          })
+        ]
+      })
 
-    // Log some stuff, both in and out of a transaction
-    logger.info('out of trans')
-    metadata.push(api.getLinkingMetadata())
-
-    helper.runInTransaction('test', () => {
-      logger.info('in trans')
+      // Log some stuff, both in and out of a transaction
+      logger.info('out of trans')
       metadata.push(api.getLinkingMetadata())
-      jsonStream.end()
+
+      helper.runInTransaction('test', () => {
+        logger.info('in trans')
+        metadata.push(api.getLinkingMetadata())
+        jsonStream.end()
+      })
     })
   })
 
