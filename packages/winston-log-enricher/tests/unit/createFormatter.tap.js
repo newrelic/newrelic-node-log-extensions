@@ -57,6 +57,10 @@ tap.test('createFormatter edge cases', (t) => {
       api.shim.isWrapped.returns(true)
       const formatter = formatFactory(api, winston)
       t.equal(formatter, winston.format.json)
+      t.equal(
+        api.shim.logger.warn.args[0][0],
+        'winston is already instrumented. Disabling application logging and using package as log enricher.'
+      )
       t.end()
     }
   )
