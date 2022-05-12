@@ -2,22 +2,6 @@
 
 ## 3.1.1 (05/11/2022)
 
- * Handled case where customer upgrades agent and log enricher will continue to function without any changes.
- * Updated formatter to favor application log forwarding when both application log forwarding and application local log decorating are both enabled.
-
-## 3.1.0 (05/05/2022)
-
- * Added a log line to log aggregator regardless of transaction context when application logging forwarding is enabled.
- * Added NR-LINKING metadata when local log decorating is enabled.
- * Cleaned up package to appropriately handle all logging use cases:
-   * agent log forwarding
-   * agent local log decorating
-   * agent supportability metrics around usage
-   * log enrichment
- * Added logic to prevent double logging with agent application log forwarding and log enrichment.
-
-## 3.0.0 (04/28/2022)
-
 **BREAKING**:  Updated the signature to require passing in the winston package instead of relying on it being a peer dependency.
 
 Before:
@@ -44,13 +28,26 @@ format: winston.format.combine(
 )
 ```
 
- * Added ability to report logs within transaction context to the agent when `config.application_logging.forwarding.enabled` is true.
- * Added application logging user metrics when `config.application_logging.metrics.enabled` is true.(`Logging/lines` and `Logging/lines/<level>`).
- * Added supportability metrics to indicate when log enricher is enabled.(`Supportability/Logging/Nodejs/winston/enabled`)
- * Bumped tap to ^16.0.1.
- * Fixed third-party notice generation.
- * Bumped @newrelic/test-utilities ^6.5.3.
+ * Added support for new application logging for the Node.js agent
+   * facilitate agent log forwarding
+   * local log decorating
+   * agent supportability metrics around usage
+   * log enrichment
+ * Added logic to prevent double logging with agent application log forwarding and log enrichment.
+ * Handled case where customer upgrades agent and log enricher will continue to function without any changes.
+ * Updated formatter to favor application log forwarding when both application log forwarding and application local log decorating are both enabled.
  * Dev-only npm audit fixes.
+ * Bumped tap to ^16.0.1.
+ * Bumped @newrelic/test-utilities ^6.5.3.
+ * Fixed third-party notice generation.
+
+## 3.1.0 (05/05/2022)
+
+ * This release has been deprecated. Please use version 3.1.1 or higher.
+
+## 3.0.0 (04/28/2022)
+
+* This release has been deprecated. Please use version 3.1.1 or higher.
 
 ## 2.1.1 (04/05/2022)
 
