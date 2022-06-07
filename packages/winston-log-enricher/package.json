@@ -1,6 +1,6 @@
 {
   "name": "@newrelic/winston-enricher",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "New Relic log enricher for the `winston` package. Allows `winston` logs to be consumed by New Relic Logs.",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
   },
   "peerDependencies": {
-    "newrelic": ">=8.12.0"
+    "newrelic": ">=8.13.0"
   },
   "devDependencies": {
     "@newrelic/test-utilities": "^6.5.3",
