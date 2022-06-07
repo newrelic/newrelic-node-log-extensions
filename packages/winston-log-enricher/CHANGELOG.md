@@ -2,7 +2,7 @@
 
 ## 3.2.0 (06/07/2022)
 
- * Restored package to only handle log enrichment and not application logging. If you want to get logs in context automatically forwarded you can use Node.js agent version v8.13.0+.
+ * Restored package to only handle log enrichment and not application logging. If you want to get logs in context automatically forwarded you can use Node.js agent version v8.13.0 or later.
 
 ## 3.1.1 (05/11/2022)
 
