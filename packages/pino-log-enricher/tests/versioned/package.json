@@ -5,17 +5,6 @@
   "tests": [
     {
       "engines": {
-        "node": "12"
-      },
-      "dependencies": {
-        "pino": ">=7.0.0 <8.0.0"
-      },
-      "files": [
-        "pino.tap.js"
-      ]
-    },
-    {
-      "engines": {
         "node": ">=14"
       },
       "dependencies": {
