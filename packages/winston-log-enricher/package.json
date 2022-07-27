@@ -1,6 +1,6 @@
 {
   "name": "@newrelic/winston-enricher",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "description": "New Relic log enricher for the `winston` package. Allows `winston` logs to be consumed by New Relic Logs.",
   "main": "index.js",
   "types": "types/index.d.ts",
