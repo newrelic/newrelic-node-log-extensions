@@ -10,13 +10,14 @@ STAGED_FILES=$(git diff-index --cached --name-only HEAD)
 
 for FILE in $STAGED_FILES
 do
-  if [ $FILE == "package.json" ]; then
+  if [[ $FILE == *"package.json" ]]; then
+    echo "- $FILE changed."
     RUN_THIRD_PARTY=1
     break
   fi
 done
 
 if [ -n "$RUN_THIRD_PARTY" ]; then
-  echo "package.json changed, running oss manifest and notices"
+  echo "One or more package.json files changed, running oss manifest and notices"
   npm run third-party-updates
 fi
