@@ -32,7 +32,7 @@ code, the source code can be found at [https://github.com/newrelic/newrelic-wins
 
 ### @newrelic/test-utilities
 
-This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v5.1.0](https://github.com/newrelic/node-test-utilities/tree/v5.1.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v5.1.0/LICENSE):
+This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v6.5.3](https://github.com/newrelic/node-test-utilities/tree/v6.5.3)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v6.5.3/LICENSE):
 
 ```
                                  Apache License
@@ -272,7 +272,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.7.1](https://github.com/newrelic/node-newrelic/tree/v8.7.1)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.7.1/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.12.0](https://github.com/newrelic/node-newrelic/tree/v8.12.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.12.0/LICENSE):
 
 ```
                                  Apache License
@@ -480,7 +480,7 @@ This product includes source derived from [newrelic](https://github.com/newrelic
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.0.1](https://github.com/tapjs/node-tap/tree/v16.0.1)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.2.0](https://github.com/tapjs/node-tap/tree/v16.2.0)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.2.0/LICENSE):
 
 ```
 The ISC License
@@ -520,7 +520,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### winston
 
-This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.6.0](https://github.com/winstonjs/winston/tree/v3.6.0)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.6.0/LICENSE):
+This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.7.2](https://github.com/winstonjs/winston/tree/v3.7.2)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.7.2/LICENSE):
 
 ```
 Copyright (c) 2010 Charlie Robbins
