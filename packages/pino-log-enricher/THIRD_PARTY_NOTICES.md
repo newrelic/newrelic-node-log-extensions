@@ -31,7 +31,7 @@ code, the source code can be found at [https://github.com/newrelic/newrelic-node
 
 ### @newrelic/test-utilities
 
-This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v6.2.0](https://github.com/newrelic/node-test-utilities/tree/v6.2.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v6.2.0/LICENSE):
+This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v6.5.3](https://github.com/newrelic/node-test-utilities/tree/v6.5.3)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v6.5.3/LICENSE):
 
 ```
                                  Apache License

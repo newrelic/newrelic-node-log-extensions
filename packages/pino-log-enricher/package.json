@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
   "peerDependencies": {
-    "newrelic": "^8.6.0"
+    "newrelic": ">=8.13.0"
   },
   "devDependencies": {
     "@newrelic/test-utilities": "^6.5.3",
