@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0 (10/17/2022)
+
+ * Updated pino-enricher to define agent peer dependency of >=8.13.0 so you can install 9.x of agent to get Node.js 18 support.
+
 ## 1.0.0 (07/27/2022)
 
 * **BREAKING** Removed support for Node 12.
