@@ -73,10 +73,9 @@ jobs:
     - name: Post Unit Test Coverage
       uses: codecov/codecov-action@v3
       with:
+        directory: ./packages
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: 
-          - packages/pino-log-enricher/coverage/unit/lcov.info
-          - packages/winston-log-enricher/coverage/unit/lcov.info
+        files: pino-log-enricher/coverage/unit/lcov.info,winston-log-enricher/coverage/unit/lcov.info
         flags: versioned-tests-${{ matrix.node-version }}
 
   versioned:
@@ -105,8 +104,7 @@ jobs:
     - name: Post Versioned Test Coverage
       uses: codecov/codecov-action@v3
       with:
+        directory: ./packages
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: 
-          - packages/pino-log-enricher/coverage/versioned/lcov.info
-          - packages/winston-log-enricher/coverage/versioned/lcov.info
+        files: pino-log-enricher/coverage/unit/lcov.info,winston-log-enricher/coverage/unit/lcov.info
         flags: versioned-tests-${{ matrix.node-version }}
