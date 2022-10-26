@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Wed Oct 26 2022 19:09:14 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Wed Oct 26 2022 19:34:12 GMT-0400 (Eastern Daylight Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeOptDeps": false,
@@ -18,19 +18,6 @@
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
-    },
-    "c8@7.12.0": {
-      "name": "c8",
-      "version": "7.12.0",
-      "range": "^7.12.0",
-      "licenses": "ISC",
-      "repoUrl": "https://github.com/bcoe/c8",
-      "versionedRepoUrl": "https://github.com/bcoe/c8/tree/v7.12.0",
-      "licenseFile": "node_modules/c8/LICENSE.txt",
-      "licenseUrl": "https://github.com/bcoe/c8/blob/v7.12.0/LICENSE.txt",
-      "licenseTextSource": "file",
-      "publisher": "Ben Coe",
-      "email": "ben@npmjs.com"
     },
     "concat-stream@2.0.0": {
       "name": "concat-stream",
