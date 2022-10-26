@@ -70,6 +70,14 @@ jobs:
         npx lerna bootstrap
     - name: Run Unit Tests
       run: npm run unit
+    - name: Post Unit Test Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: 
+          - packages/pino-log-enricher/coverage/unit/lcov.info
+          - packages/winston-log-enricher/coverage/unit/lcov.info
+        flags: versioned-tests-${{ matrix.node-version }}
 
   versioned:
     runs-on: ubuntu-latest
@@ -94,3 +102,11 @@ jobs:
     - name: Run Versioned Tests (npm v7+ / Node 16+)
       if: ${{ matrix.node-version != '14.x' }}
       run: npm run versioned:npm7
+    - name: Post Versioned Test Coverage
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: 
+          - packages/pino-log-enricher/coverage/versioned/lcov.info
+          - packages/winston-log-enricher/coverage/versioned/lcov.info
+        flags: versioned-tests-${{ matrix.node-version }}

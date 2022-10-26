@@ -1,6 +1,8 @@
-[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)
+[![Community Plus header](https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)
 
 # New Relic Node.js logging extensions
+
+[![npm status badge][5]][6] [![npm status badge][7]][8] [![Log Extensions CI][1]][2] [![codecov][9]][10]
 
 The New Relic logging plugins are extensions for common Node.js logging frameworks. They are designed to capture app,
 transaction trace, and span information as part of your application log messages.
@@ -57,3 +59,12 @@ To all contributors, we thank you!  Without your contribution, this project woul
 
 ## License
 The New Relic Node.js loggin extensions are licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+
+[1]: https://github.com/newrelic/newrelic-node-log-extensions/workflows/Log%20Extensions%20CI/badge.svg
+[2]: https://github.com/newrelic/newrelic-node-log-extensions/actions
+[5]: https://img.shields.io/npm/v/@newrelic/winston-enricher.svg?label=@newrelic/winston-enricher
+[6]: https://www.npmjs.com/package/@newrelic/winston-enricher
+[7]: https://img.shields.io/npm/v/@newrelic/pino-enricher.svg?label=@newrelic/pino-enricher
+[8]: https://www.npmjs.com/package/@newrelic/pino-enricher
+[9]: https://codecov.io/gh/newrelic/newrelic-node-log-extensions/branch/main/graph/badge.svg?token=QUFKIFMGO5
+[10]: https://codecov.io/gh/newrelic/newrelic-node-log-extensions

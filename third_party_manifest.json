@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Mon Oct 17 2022 13:35:44 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Wed Oct 26 2022 19:09:12 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Node.js Log Extensions",
   "projectUrl": "https://github.com/newrelic/newrelic-node-log-extensions",
   "includeOptDeps": false,
@@ -93,15 +93,15 @@
       "publisher": "Typicode",
       "email": "typicode@gmail.com"
     },
-    "lerna@4.0.0": {
+    "lerna@6.0.0": {
       "name": "lerna",
-      "version": "4.0.0",
-      "range": "^4.0.0",
+      "version": "6.0.0",
+      "range": "^6.0.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/lerna/lerna",
-      "versionedRepoUrl": "https://github.com/lerna/lerna/tree/v4.0.0",
+      "versionedRepoUrl": "https://github.com/lerna/lerna/tree/v6.0.0",
       "licenseFile": "node_modules/lerna/LICENSE",
-      "licenseUrl": "https://github.com/lerna/lerna/blob/v4.0.0/LICENSE",
+      "licenseUrl": "https://github.com/lerna/lerna/blob/v6.0.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Sebastian McKenzie",
       "email": "sebmck@gmail.com"

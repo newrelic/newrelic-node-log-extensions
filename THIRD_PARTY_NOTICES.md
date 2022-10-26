@@ -587,7 +587,7 @@ SOFTWARE.
 
 ### lerna
 
-This product includes source derived from [lerna](https://github.com/lerna/lerna) ([v4.0.0](https://github.com/lerna/lerna/tree/v4.0.0)), distributed under the [MIT License](https://github.com/lerna/lerna/blob/v4.0.0/LICENSE):
+This product includes source derived from [lerna](https://github.com/lerna/lerna) ([v6.0.0](https://github.com/lerna/lerna/tree/v6.0.0)), distributed under the [MIT License](https://github.com/lerna/lerna/blob/v6.0.0/LICENSE):
 
 ```
 Copyright (c) 2015-present Lerna Contributors
