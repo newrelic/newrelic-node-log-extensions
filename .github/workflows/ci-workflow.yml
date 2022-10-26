@@ -76,7 +76,7 @@ jobs:
         directory: ./packages
         token: ${{ secrets.CODECOV_TOKEN }}
         files: pino-log-enricher/coverage/unit/lcov.info,winston-log-enricher/coverage/unit/lcov.info
-        flags: versioned-tests-${{ matrix.node-version }}
+        flags: unit-tests-${{ matrix.node-version }}
 
   versioned:
     runs-on: ubuntu-latest
