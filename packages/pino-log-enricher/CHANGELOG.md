@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1 (12/15/2022)
+
+ * Fixed an issue where logging non-standard error objects under the err key causes APM to throw.
+
 ## 1.1.0 (10/17/2022)
 
  * Updated pino-enricher to define agent peer dependency of >=8.13.0 so you can install 9.x of agent to get Node.js 18 support.
