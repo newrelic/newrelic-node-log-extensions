@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 4.0.1 (12/15/2022)
+ * Fixed an issue where logging non-standard error objects under the err key causes APM to throw.
+
 ## 4.0.0 (07/27/2022)
 
 * **BREAKING** Removed support for Node 12.

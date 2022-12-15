@@ -1,6 +1,6 @@
 {
   "name": "@newrelic/pino-enricher",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "New Relic log encricher for the `pino` package. Allows `pino` logs to be consumed by New Relic Logs.",
   "main": "index.js",
   "scripts": {
