@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Thu Dec 15 2022 12:57:36 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Tue Dec 20 2022 15:18:19 GMT-0500 (Eastern Standard Time)",
   "projectName": "@newrelic/winston-enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-winston-logenricher-node",
   "includeOptDeps": false,
@@ -32,15 +32,15 @@
       "publisher": "Max Ogden",
       "email": "max@maxogden.com"
     },
-    "newrelic@8.12.0": {
+    "newrelic@8.7.1": {
       "name": "newrelic",
-      "version": "8.12.0",
-      "range": "^8.7.1",
+      "version": "8.7.1",
+      "range": "8.7.1",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.12.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.7.1",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.12.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.7.1/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -73,15 +73,15 @@
       "email": "sam.verschueren@gmail.com",
       "url": "https://github.com/SamVerschueren"
     },
-    "winston@3.7.2": {
+    "winston@3.6.0": {
       "name": "winston",
-      "version": "3.7.2",
-      "range": "^3.6.0",
+      "version": "3.6.0",
+      "range": "3.6.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/winstonjs/winston",
-      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.7.2",
+      "versionedRepoUrl": "https://github.com/winstonjs/winston/tree/v3.6.0",
       "licenseFile": "node_modules/winston/LICENSE",
-      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.7.2/LICENSE",
+      "licenseUrl": "https://github.com/winstonjs/winston/blob/v3.6.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Charlie Robbins",
       "email": "charlie.robbins@gmail.com"

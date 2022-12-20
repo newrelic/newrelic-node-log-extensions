@@ -31,7 +31,7 @@ code, the source code can be found at [https://github.com/newrelic/newrelic-node
 
 ### @newrelic/test-utilities
 
-This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v6.5.3](https://github.com/newrelic/node-test-utilities/tree/v6.5.3)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v6.5.3/LICENSE):
+This product includes source derived from [@newrelic/test-utilities](https://github.com/newrelic/node-test-utilities) ([v6.5.5](https://github.com/newrelic/node-test-utilities/tree/v6.5.5)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-test-utilities/blob/v6.5.5/LICENSE):
 
 ```
                                  Apache License
@@ -269,7 +269,7 @@ THE SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.6.0](https://github.com/newrelic/node-newrelic/tree/v8.6.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.6.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.17.1](https://github.com/newrelic/node-newrelic/tree/v8.17.1)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.17.1/LICENSE):
 
 ```
                                  Apache License
@@ -498,7 +498,7 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ### tap
 
-This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.0.1](https://github.com/tapjs/node-tap/tree/v16.0.1)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE):
+This product includes source derived from [tap](https://github.com/tapjs/node-tap) ([v16.3.2](https://github.com/tapjs/node-tap/tree/v16.3.2)), distributed under the [ISC License](https://github.com/tapjs/node-tap/blob/v16.3.2/LICENSE):
 
 ```
 The ISC License

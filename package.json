@@ -8,6 +8,7 @@
     "prepare": "husky install",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:lockfile": "lerna run lint:lockfile",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json && lerna run third-party-updates",
     "unit": "c8 -o ./coverage/unit lerna run unit",
     "versioned": "lerna run versioned",
@@ -35,6 +36,7 @@
     "husky": "^7.0.4",
     "lerna": "^6.0.0",
     "lint-staged": "^12.1.2",
+    "lockfile-lint": "^4.9.6",
     "prettier": "^2.4.1"
   }
 }

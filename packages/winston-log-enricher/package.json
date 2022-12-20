@@ -8,6 +8,7 @@
     "unit": "tap tests/unit/**/*.tap.js --no-coverage",
     "lint": "eslint *.js lib tests",
     "lint:fix": "eslint --fix *.js lib tests",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https --validate-integrity",
     "types": "tsd",
     "test": "npm run unit && npm run lint && npm run types && npm run versioned",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
@@ -26,12 +27,12 @@
     "newrelic": ">=8.13.0"
   },
   "devDependencies": {
-    "@newrelic/test-utilities": "^6.5.3",
-    "concat-stream": "^2.0.0",
-    "newrelic": "^8.7.1",
-    "tap": "^16.2.0",
-    "tsd": "^0.18.0",
-    "winston": "^3.6.0"
+    "@newrelic/test-utilities": "6.5.3",
+    "concat-stream": "2.0.0",
+    "newrelic": "8.7.1",
+    "tap": "16.2.0",
+    "tsd": "0.18.0",
+    "winston": "3.6.0"
   },
   "engines": {
     "node": ">=14.0"
