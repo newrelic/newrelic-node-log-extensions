@@ -8,6 +8,7 @@
     "test": "npm run unit && npm run versioned",
     "lint": "eslint *.js lib tests",
     "lint:fix": "eslint --fix *.js lib tests",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https --validate-integrity",
     "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json",
     "versioned": "npm run versioned:npm6",
     "versioned:npm6": "versioned-tests --minor -i 2 tests/versioned/*.tap.js",

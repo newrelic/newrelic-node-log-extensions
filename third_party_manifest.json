@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Thu Dec 15 2022 12:57:35 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Tue Dec 20 2022 15:18:18 GMT-0500 (Eastern Standard Time)",
   "projectName": "New Relic Node.js Log Extensions",
   "projectUrl": "https://github.com/newrelic/newrelic-node-log-extensions",
   "includeOptDeps": false,
@@ -131,6 +131,20 @@
       "licenseTextSource": "file",
       "publisher": "Andrey Okonetchnikov",
       "email": "andrey@okonet.ru"
+    },
+    "lockfile-lint@4.9.6": {
+      "name": "lockfile-lint",
+      "version": "4.9.6",
+      "range": "^4.9.6",
+      "licenses": "Apache-2.0",
+      "repoUrl": "https://github.com/lirantal/lockfile-lint",
+      "versionedRepoUrl": "https://github.com/lirantal/lockfile-lint/tree/v4.9.6",
+      "licenseFile": "node_modules/lockfile-lint/LICENSE",
+      "licenseUrl": "https://github.com/lirantal/lockfile-lint/blob/v4.9.6/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Liran Tal",
+      "email": "liran.tal@gmail.com",
+      "url": "https://github.com/lirantal"
     },
     "prettier@2.6.2": {
       "name": "prettier",

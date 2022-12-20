@@ -1,20 +1,20 @@
 {
-  "lastUpdated": "Thu Dec 15 2022 12:57:36 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Tue Dec 20 2022 15:18:19 GMT-0500 (Eastern Standard Time)",
   "projectName": "New Relic Pino Log Enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-node-pino-logenricher",
   "includeOptDeps": false,
   "includeDev": true,
   "dependencies": {},
   "devDependencies": {
-    "@newrelic/test-utilities@6.5.3": {
+    "@newrelic/test-utilities@6.5.5": {
       "name": "@newrelic/test-utilities",
-      "version": "6.5.3",
+      "version": "6.5.5",
       "range": "^6.5.3",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-test-utilities",
-      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v6.5.3",
+      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v6.5.5",
       "licenseFile": "node_modules/@newrelic/test-utilities/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v6.5.3/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v6.5.5/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -32,15 +32,15 @@
       "publisher": "Mathias Buus",
       "url": "@mafintosh"
     },
-    "newrelic@8.6.0": {
+    "newrelic@8.17.1": {
       "name": "newrelic",
-      "version": "8.6.0",
+      "version": "8.17.1",
       "range": "^8.6.0",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.6.0",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.17.1",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.6.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.17.1/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -58,15 +58,15 @@
       "publisher": "Matteo Collina",
       "email": "hello@matteocollina.com"
     },
-    "tap@16.0.1": {
+    "tap@16.3.2": {
       "name": "tap",
-      "version": "16.0.1",
+      "version": "16.3.2",
       "range": "^16.0.1",
       "licenses": "ISC",
       "repoUrl": "https://github.com/tapjs/node-tap",
-      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.0.1",
+      "versionedRepoUrl": "https://github.com/tapjs/node-tap/tree/v16.3.2",
       "licenseFile": "node_modules/tap/LICENSE",
-      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.0.1/LICENSE",
+      "licenseUrl": "https://github.com/tapjs/node-tap/blob/v16.3.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Isaac Z. Schlueter",
       "email": "i@izs.me",

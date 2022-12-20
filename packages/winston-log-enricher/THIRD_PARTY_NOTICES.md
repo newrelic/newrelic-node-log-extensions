@@ -272,7 +272,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### newrelic
 
-This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.12.0](https://github.com/newrelic/node-newrelic/tree/v8.12.0)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.12.0/LICENSE):
+This product includes source derived from [newrelic](https://github.com/newrelic/node-newrelic) ([v8.7.1](https://github.com/newrelic/node-newrelic/tree/v8.7.1)), distributed under the [Apache-2.0 License](https://github.com/newrelic/node-newrelic/blob/v8.7.1/LICENSE):
 
 ```
                                  Apache License
@@ -520,7 +520,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### winston
 
-This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.7.2](https://github.com/winstonjs/winston/tree/v3.7.2)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.7.2/LICENSE):
+This product includes source derived from [winston](https://github.com/winstonjs/winston) ([v3.6.0](https://github.com/winstonjs/winston/tree/v3.6.0)), distributed under the [MIT License](https://github.com/winstonjs/winston/blob/v3.6.0/LICENSE):
 
 ```
 Copyright (c) 2010 Charlie Robbins
