@@ -27,9 +27,9 @@
     "newrelic": ">=8.13.0"
   },
   "devDependencies": {
-    "@newrelic/test-utilities": "6.5.3",
+    "@newrelic/test-utilities": "^7.3.2",
     "concat-stream": "2.0.0",
-    "newrelic": "8.7.1",
+    "newrelic": "^10.3.2",
     "tap": "16.2.0",
     "tsd": "0.18.0",
     "winston": "3.6.0"
