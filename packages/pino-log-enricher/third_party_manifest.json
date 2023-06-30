@@ -1,20 +1,20 @@
 {
-  "lastUpdated": "Tue Dec 20 2022 15:18:19 GMT-0500 (Eastern Standard Time)",
+  "lastUpdated": "Fri Jun 30 2023 11:28:25 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Pino Log Enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-node-pino-logenricher",
   "includeOptDeps": false,
   "includeDev": true,
   "dependencies": {},
   "devDependencies": {
-    "@newrelic/test-utilities@6.5.5": {
+    "@newrelic/test-utilities@7.3.2": {
       "name": "@newrelic/test-utilities",
-      "version": "6.5.5",
-      "range": "^6.5.3",
+      "version": "7.3.2",
+      "range": "^7.3.2",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-test-utilities",
-      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v6.5.5",
+      "versionedRepoUrl": "https://github.com/newrelic/node-test-utilities/tree/v7.3.2",
       "licenseFile": "node_modules/@newrelic/test-utilities/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v6.5.5/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-test-utilities/blob/v7.3.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
@@ -32,15 +32,15 @@
       "publisher": "Mathias Buus",
       "url": "@mafintosh"
     },
-    "newrelic@8.17.1": {
+    "newrelic@10.3.2": {
       "name": "newrelic",
-      "version": "8.17.1",
-      "range": "^8.6.0",
+      "version": "10.3.2",
+      "range": "^10.3.2",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/node-newrelic",
-      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v8.17.1",
+      "versionedRepoUrl": "https://github.com/newrelic/node-newrelic/tree/v10.3.2",
       "licenseFile": "node_modules/newrelic/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v8.17.1/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/node-newrelic/blob/v10.3.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic Node.js agent team",
       "email": "nodejs@newrelic.com"
