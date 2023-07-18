@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Fri Jun 30 2023 11:28:24 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Tue Jul 11 2023 15:54:22 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Node.js Log Extensions",
   "projectUrl": "https://github.com/newrelic/newrelic-node-log-extensions",
   "includeOptDeps": false,
@@ -30,6 +30,19 @@
       "licenseUrl": "https://github.com/newrelic/newrelic-oss-cli/blob/v0.1.2/LICENSE",
       "licenseTextSource": "file",
       "publisher": "New Relic"
+    },
+    "c8@7.12.0": {
+      "name": "c8",
+      "version": "7.12.0",
+      "range": "^7.12.0",
+      "licenses": "ISC",
+      "repoUrl": "https://github.com/bcoe/c8",
+      "versionedRepoUrl": "https://github.com/bcoe/c8/tree/v7.12.0",
+      "licenseFile": "node_modules/c8/LICENSE.txt",
+      "licenseUrl": "https://github.com/bcoe/c8/blob/v7.12.0/LICENSE.txt",
+      "licenseTextSource": "file",
+      "publisher": "Ben Coe",
+      "email": "ben@npmjs.com"
     },
     "eslint-plugin-header@3.1.1": {
       "name": "eslint-plugin-header",
@@ -93,15 +106,15 @@
       "publisher": "Typicode",
       "email": "typicode@gmail.com"
     },
-    "lerna@4.0.0": {
+    "lerna@6.0.0": {
       "name": "lerna",
-      "version": "4.0.0",
+      "version": "6.0.0",
       "range": "^6.0.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/lerna/lerna",
-      "versionedRepoUrl": "https://github.com/lerna/lerna/tree/v4.0.0",
+      "versionedRepoUrl": "https://github.com/lerna/lerna/tree/v6.0.0",
       "licenseFile": "node_modules/lerna/LICENSE",
-      "licenseUrl": "https://github.com/lerna/lerna/blob/v4.0.0/LICENSE",
+      "licenseUrl": "https://github.com/lerna/lerna/blob/v6.0.0/LICENSE",
       "licenseTextSource": "file",
       "publisher": "Sebastian McKenzie",
       "email": "sebmck@gmail.com"
@@ -118,6 +131,20 @@
       "licenseTextSource": "file",
       "publisher": "Andrey Okonetchnikov",
       "email": "andrey@okonet.ru"
+    },
+    "lockfile-lint@4.9.6": {
+      "name": "lockfile-lint",
+      "version": "4.9.6",
+      "range": "^4.9.6",
+      "licenses": "Apache-2.0",
+      "repoUrl": "https://github.com/lirantal/lockfile-lint",
+      "versionedRepoUrl": "https://github.com/lirantal/lockfile-lint/tree/v4.9.6",
+      "licenseFile": "node_modules/lockfile-lint/LICENSE",
+      "licenseUrl": "https://github.com/lirantal/lockfile-lint/blob/v4.9.6/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Liran Tal",
+      "email": "liran.tal@gmail.com",
+      "url": "https://github.com/lirantal"
     },
     "prettier@2.6.2": {
       "name": "prettier",

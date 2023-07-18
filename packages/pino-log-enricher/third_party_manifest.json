@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Fri Jun 30 2023 11:28:25 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Tue Jul 11 2023 15:54:24 GMT-0400 (Eastern Daylight Time)",
   "projectName": "New Relic Pino Log Enricher",
   "projectUrl": "https://github.com/newrelic/newrelic-node-pino-logenricher",
   "includeOptDeps": false,
