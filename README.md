@@ -1,3 +1,5 @@
+_**This is repository is no longer maintained. This functionality is in the New Relic Node.js agent as of [8.16.0](https://github.com/newrelic/node-newrelic/releases/tag/v8.16.0). Follow our [docs](https://docs.newrelic.com/docs/logs/logs-context/configure-logs-context-nodejs/)**_
+
 <a href="https://opensource.newrelic.com/oss-category/#community-plus"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/dark/Community_Plus.png"><source media="(prefers-color-scheme: light)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Plus.png"><img alt="New Relic Open Source community plus project banner." src="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Plus.png"></picture></a>
 
 # New Relic Node.js logging extensions
